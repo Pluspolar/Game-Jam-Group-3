@@ -1,15 +1,33 @@
 [gd_scene format=3 uid="uid://cp63kc2ym1jcn"]
 
 [ext_resource type="Script" uid="uid://cxlii41v7ciq2" path="res://Scenes/player.gd" id="1_v0iea"]
+[ext_resource type="Texture2D" uid="uid://cv4v1d5frtray" path="res://icon.svg" id="2_cvnsp"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_6t5aa"]
+atlas = ExtResource("2_cvnsp")
+region = Rect2(0, 0, 128, 128)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_vgqql"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_6t5aa")
+}],
+"loop": true,
+"name": &"default",
+"speed": 5.0
+}]
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_f60y1"]
 
 [node name="Player" type="CharacterBody2D" unique_id=38737271]
 script = ExtResource("1_v0iea")
 
-[node name="Hitbox" type="CollisionShape2D" parent="." unique_id=102091354]
-shape = SubResource("CircleShape2D_f60y1")
-
 [node name="Reversable" type="Node2D" parent="." unique_id=62569021]
 
 [node name="AnimatedSprite" type="AnimatedSprite2D" parent="Reversable" unique_id=193856732]
+scale = Vector2(0.125, 0.12499999)
+sprite_frames = SubResource("SpriteFrames_vgqql")
+
+[node name="Hitbox" type="CollisionShape2D" parent="." unique_id=102091354]
+shape = SubResource("CircleShape2D_f60y1")

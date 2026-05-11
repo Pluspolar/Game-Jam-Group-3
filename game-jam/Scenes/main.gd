@@ -2,20 +2,53 @@ extends Node2D
 var line: Line2D
 
 @onready var player := $Player
+@export var string_amount : float = 64 #Use Even Number
+@export var stretchiness : float = 100
+@export var x_stretch : float = 0.75  #it's better to be between 0-1, it streches more based on the x axis
+@export var vel_y_pitfall : float = 500 #Prevent infinite velocity at the absolute value of the velocity
+@export var vel_y_air_resist : float = 57 #to get the value, x = (1-{wanted velocity loss})/0.016667
+
+var mouse_point : Vector2
+var distance : float
 
 func _ready() -> void:
 	line = Line2D.new()
 	add_child(line)
 	
 	line.width = 4
-	line.default_color = Color(1, 1, 1, 0.5) # Red line
+	line.default_color = Color(1, 1, 1, 0.5)
 	line.antialiased = true
 
-	# Add initial points
+func create_line(player_pos: Vector2, mouse_pos: Vector2):
+	distance = player_pos.distance_to(mouse_point)
+	line.clear_points()
+	line.add_point(player_pos)
+	var line_coords : Vector2 = player_pos
+	var mouse_0 := Vector2(mouse_pos.x - player_pos.x, mouse_pos.y - player_pos.y)
+	
+	for i in range (string_amount-1):
+		line_coords += Vector2(mouse_0.x/string_amount, mouse_0.y/string_amount)
+		line.add_point(line_coords)
+		
+	for i in range (1, string_amount):
+		##var strecth_amount : float = pow(((string_amount/2)-abs(i-(string_amount/2)))*500, 0.5)
+		var strecth_amount : float = sin((((string_amount/2)-abs(i-(string_amount/2)))/string_amount)*3.14)* stretchiness *(pow(abs(player_pos.x-mouse_pos.x), x_stretch)/100) #1/((pow(abs(player.velocity.x), 0.3)*0.1)+1)
+		line_coords = Vector2(line.get_point_position(i).x, line.get_point_position(i).y+strecth_amount)
+		line.set_point_position(i, line_coords)
+		
+	line.add_point(mouse_pos)
 	
 func _process(delta: float) -> void:
 	if Input.is_action_pressed("shoot"):
-		line.clear_points()
-		line.add_point(player.position)
-		line.add_point(get_viewport().get_mouse_position())
+		mouse_point = get_viewport().get_mouse_position()
+		
+		var dir_vel = player.position.direction_to(mouse_point)
+		
+		distance = pow(distance, 2)
+		player.velocity += Vector2(dir_vel.x * distance/50, dir_vel.y * distance/50) * delta
+		if abs(player.velocity.y) >= vel_y_pitfall: player.velocity.y *= vel_y_air_resist * delta #Patched infinite energy
+		
+		create_line(player.position, mouse_point)
+		#print(angle)
+		print(player.velocity)
 	

@@ -9,3 +9,7 @@ func _ready() -> void:
 func _physics_process(delta: float) -> void:
 	position.y += ((int(Input.is_action_pressed("up"))*-1) + (int(Input.is_action_pressed("down")))) * delta * speed
 	position.x += ((int(Input.is_action_pressed("left"))*-1) + (int(Input.is_action_pressed("right")))) * delta * speed
+
+	velocity.x *= 59 * delta
+	velocity.y += 1000 * delta
+	position += velocity * delta
