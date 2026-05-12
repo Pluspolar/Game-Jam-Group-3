@@ -6,7 +6,7 @@ var line: Line2D
 @export var stretchiness : float = 100
 @export var x_stretch : float = 0.75  #it's better to be between 0-1, it streches more based on the x axis
 @export var vel_y_pitfall : float = 500 #Prevent infinite velocity at the absolute value of the velocity
-@export var vel_y_air_resist : float = 57 #to get the value, x = (1-{wanted velocity loss})/0.016667
+@export var vel_y_air_resist : float = 0.98 #to get the value
 
 var mouse_point : Vector2
 var distance : float
@@ -46,7 +46,7 @@ func _process(delta: float) -> void:
 		
 		distance = pow(distance, 2)
 		player.velocity += Vector2(dir_vel.x * distance/50, dir_vel.y * distance/50) * delta
-		if abs(player.velocity.y) >= vel_y_pitfall: player.velocity.y *= vel_y_air_resist * delta #Patched infinite energy
+		if abs(player.velocity.y) >= vel_y_pitfall: player.velocity.y *= vel_y_air_resist / delta * delta #Patched infinite energy
 		
 		create_line(player.position, mouse_point)
 		#print(angle)
