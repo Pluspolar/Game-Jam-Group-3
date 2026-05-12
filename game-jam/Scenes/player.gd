@@ -2,6 +2,7 @@ extends CharacterBody2D
 class_name Player
 
 @export var speed: float = 200
+@export var speed_limit: float = 10000
 
 func _ready() -> void:
 	position = Vector2(640, 360)
@@ -13,3 +14,6 @@ func _physics_process(delta: float) -> void:
 	velocity.x *= 0.985 / delta * delta
 	velocity.y += 1000 * delta
 	position += velocity * delta
+
+	if abs(velocity.x) > speed_limit: velocity.x = speed_limit * abs(velocity.x)/velocity.x
+	if abs(velocity.y) > speed_limit: velocity.y = speed_limit * abs(velocity.y)/velocity.y

@@ -46,7 +46,7 @@ func _process(delta: float) -> void:
 		
 		distance = pow(distance, 2)
 		player.velocity += Vector2(dir_vel.x * distance/50, dir_vel.y * distance/50) * delta
-		if abs(player.velocity.y) >= vel_y_pitfall: player.velocity.y *= vel_y_air_resist / delta * delta #Patched infinite energy
+		if abs(player.velocity.y) > vel_y_pitfall: player.velocity.y *= vel_y_air_resist / delta * delta #Patched infinite energy
 		
 		create_line(player.position, mouse_point)
 		#print(angle)
