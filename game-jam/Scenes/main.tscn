@@ -2,10 +2,13 @@
 
 [ext_resource type="Script" uid="uid://c4ox0svdgy856" path="res://Scenes/main.gd" id="1_bo1nx"]
 [ext_resource type="PackedScene" uid="uid://cp63kc2ym1jcn" path="res://Scenes/player.tscn" id="1_jjgbg"]
+[ext_resource type="PackedScene" uid="uid://c3kjx72nr0ib0" path="res://Scenes/walls.tscn" id="3_8gbba"]
 
 [node name="main" type="Node2D" unique_id=1425132053]
 script = ExtResource("1_bo1nx")
-string_amount = 48.0
-stretchiness = 400.0
 
 [node name="Player" parent="." unique_id=38737271 instance=ExtResource("1_jjgbg")]
+position = Vector2(659, 335)
+
+[node name="walls" parent="." unique_id=1711967700 instance=ExtResource("3_8gbba")]
+metadata/_edit_lock_ = true

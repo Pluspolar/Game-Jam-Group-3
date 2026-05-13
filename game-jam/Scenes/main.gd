@@ -2,12 +2,13 @@ extends Node2D
 var line: Line2D
 
 @onready var player := $Player
-@export var string_amount : float = 64 #Use Even Number
-@export var stretchiness : float = 100
+@export var string_amount : float = 40 #Use Even Number
+@export var stretchiness : float = 400
 @export var x_stretch : float = 0.75  #it's better to be between 0-1, it streches more based on the x axis
-@export var vel_y_pitfall : float = 500 #Prevent infinite velocity at the absolute value of the velocity
+@export var vel_y_pitfall : float = 125 #Prevent infinite velocity at the absolute value of the velocity
 @export var vel_y_air_resist : float = 0.98 #to get the value
 @export var speed_limit: float = 10000
+@export var string_power: float = 1.5
 
 var mouse_point : Vector2
 var distance : float
@@ -48,13 +49,14 @@ func _process(delta: float) -> void:
 		
 		distance = pow(distance, 2)
 		
-		player.velocity += Vector2(dir_vel.x * distance/50, dir_vel.y * distance/50) * delta
+		player.velocity += Vector2(dir_vel.x * distance/50, dir_vel.y * distance/50) * delta * string_power
 		if abs(player.velocity.y) > vel_y_pitfall: player.velocity.y *= vel_y_air_resist / delta * delta #Patched infinite energy
 		
 		if abs(player.velocity.x) > speed_limit: player.velocity.x = speed_limit * abs(player.velocity.x)/player.velocity.x
 		if abs(player.velocity.y) > speed_limit: player.velocity.y = speed_limit * abs(player.velocity.y)/player.velocity.y
 		
 		create_line(player.position, mouse_point)
+		
 		#print(angle)
-		print(player.velocity)
+		#print(player.velocity)
 	
