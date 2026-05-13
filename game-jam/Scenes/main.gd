@@ -10,6 +10,7 @@ var line: Line2D
 @export var speed_limit: float = 10000
 @export var string_power: float = 1.5
 
+var strecth_amount : float = 0
 var mouse_point : Vector2
 var distance : float
 
@@ -35,7 +36,7 @@ func create_line(player_pos: Vector2, mouse_pos: Vector2):
 		
 	for i in range (1, string_amount):
 		##var strecth_amount : float = pow(((string_amount/2)-abs(i-(string_amount/2)))*500, 0.5) * sin((((string_amount/2)-abs(i-(string_amount/2)))/string_amount)*3.14)
-		var strecth_amount : float = sin((i/string_amount)*3.14) * stretchiness *(pow(abs(player_pos.x-mouse_pos.x), x_stretch)/100) * 1/(((pow(distance, 2)*0.0001))+1) #1/((pow(abs(player.velocity.x), 0.3)*0.1)+1)
+		strecth_amount = sin((i/string_amount)*3.14) * stretchiness *(pow(abs(player_pos.x-mouse_pos.x), x_stretch)/100) * 1/(((pow(distance, 2)*0.0001))+1) #1/((pow(abs(player.velocity.x), 0.3)*0.1)+1)
 		line_coords = Vector2(line.get_point_position(i).x, line.get_point_position(i).y+strecth_amount) #+ cos(i/(3.14/2))*2.5)
 		line.set_point_position(i, line_coords)
 		
