@@ -16,13 +16,13 @@ func _ready() -> void:
 	line = Line2D.new()
 	add_child(line)
 	
-	line.width = 4
+	line.width = 4.5
 	line.default_color = Color(1, 1, 1, 0.5)
 	line.antialiased = true
 
 func create_line(player_pos: Vector2, mouse_pos: Vector2):
 	distance = player_pos.distance_to(mouse_point)
-	line.width = 5/(((pow(distance, 1.5)*0.0001))+1)
+	line.width = 4.5/(((pow(distance, 1.5)*0.000075))+1)
 	line.clear_points()
 	line.add_point(player_pos)
 	var line_coords : Vector2 = player_pos
@@ -33,8 +33,8 @@ func create_line(player_pos: Vector2, mouse_pos: Vector2):
 		line.add_point(line_coords)
 		
 	for i in range (1, string_amount):
-		##var strecth_amount : float = pow(((string_amount/2)-abs(i-(string_amount/2)))*500, 0.5)
-		var strecth_amount : float = sin((((string_amount/2)-abs(i-(string_amount/2)))/string_amount)*3.14)* stretchiness *(pow(abs(player_pos.x-mouse_pos.x), x_stretch)/100) * 1/(((pow(distance, 2)*0.0001))+1) #1/((pow(abs(player.velocity.x), 0.3)*0.1)+1)
+		##var strecth_amount : float = pow(((string_amount/2)-abs(i-(string_amount/2)))*500, 0.5) * sin((((string_amount/2)-abs(i-(string_amount/2)))/string_amount)*3.14)
+		var strecth_amount : float = sin((i/string_amount)*3.14) * stretchiness *(pow(abs(player_pos.x-mouse_pos.x), x_stretch)/100) * 1/(((pow(distance, 2)*0.0001))+1) #1/((pow(abs(player.velocity.x), 0.3)*0.1)+1)
 		line_coords = Vector2(line.get_point_position(i).x, line.get_point_position(i).y+strecth_amount) #+ cos(i/(3.14/2))*2.5)
 		line.set_point_position(i, line_coords)
 		
