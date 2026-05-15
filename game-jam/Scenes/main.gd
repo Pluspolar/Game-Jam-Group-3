@@ -11,7 +11,7 @@ var line: Line2D
 @export var string_power: float = 1.5
 
 var strecth_amount : float = 0
-var mouse_point : Vector2
+#var mouse_point : Vector2
 var distance : float
 
 func _ready() -> void:
@@ -22,13 +22,13 @@ func _ready() -> void:
 	line.default_color = Color(1, 1, 1, 0.5)
 	line.antialiased = true
 
-func create_line(player_pos: Vector2, mouse_pos: Vector2):
-	distance = player_pos.distance_to(mouse_point)
+func create_line(player_pos: Vector2):
+	distance = player_pos.distance_to(Global.string_target)
 	line.width = 4.5/(((pow(distance, 1.5)*0.000075))+1)
 	line.clear_points()
 	line.add_point(player_pos)
 	var line_coords : Vector2 = player_pos
-	var mouse_0 := Vector2(mouse_pos.x - player_pos.x, mouse_pos.y - player_pos.y)
+	var mouse_0 := Vector2(Global.string_target.x - player_pos.x, Global.string_target.y - player_pos.y)
 	
 	for i in range (string_amount-1):
 		line_coords += Vector2(mouse_0.x/string_amount, mouse_0.y/string_amount)
@@ -36,17 +36,15 @@ func create_line(player_pos: Vector2, mouse_pos: Vector2):
 		
 	for i in range (1, string_amount):
 		##var strecth_amount : float = pow(((string_amount/2)-abs(i-(string_amount/2)))*500, 0.5) * sin((((string_amount/2)-abs(i-(string_amount/2)))/string_amount)*3.14)
-		strecth_amount = sin((i/string_amount)*3.14) * stretchiness *(pow(abs(player_pos.x-mouse_pos.x), x_stretch)/100) * 1/(((pow(distance, 2)*0.0001))+1) #1/((pow(abs(player.velocity.x), 0.3)*0.1)+1)
+		strecth_amount = sin((i/string_amount)*3.14) * stretchiness *(pow(abs(player_pos.x-Global.string_target.x), x_stretch)/100) * 1/(((pow(distance, 2)*0.0001))+1) #1/((pow(abs(player.velocity.x), 0.3)*0.1)+1)
 		line_coords = Vector2(line.get_point_position(i).x, line.get_point_position(i).y+strecth_amount) #+ cos(i/(3.14/2))*2.5)
 		line.set_point_position(i, line_coords)
 		
-	line.add_point(mouse_pos)
+	line.add_point(Global.string_target)
 	
 func _process(delta: float) -> void:
-	if Input.is_action_pressed("shoot"):
-		mouse_point = get_viewport().get_mouse_position()
-		
-		var dir_vel = player.position.direction_to(mouse_point)
+	if Global.is_swinging:
+		var dir_vel = player.position.direction_to(Global.string_target)
 		
 		distance = pow(distance, 2)
 		
@@ -56,8 +54,11 @@ func _process(delta: float) -> void:
 		if abs(player.velocity.x) > speed_limit: player.velocity.x = speed_limit * abs(player.velocity.x)/player.velocity.x
 		if abs(player.velocity.y) > speed_limit: player.velocity.y = speed_limit * abs(player.velocity.y)/player.velocity.y
 		
-		create_line(player.position, mouse_point)
+		create_line(player.position)
 		
 		#print(angle)
 		#print(player.velocity)
-	
+		
+	else:
+		line.clear_points()
+	print(Global.string_target)
