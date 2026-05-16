@@ -22,6 +22,7 @@ animations = [{
 size = Vector2(16, 16)
 
 [node name="Player" type="CharacterBody2D" unique_id=38737271]
+collision_mask = 3
 script = ExtResource("1_v0iea")
 speed = 500.0
 
@@ -30,6 +31,63 @@ speed = 500.0
 [node name="AnimatedSprite" type="AnimatedSprite2D" parent="Reversable" unique_id=193856732]
 scale = Vector2(0.125, 0.12499999)
 sprite_frames = SubResource("SpriteFrames_vgqql")
+
+[node name="particles" type="Node2D" parent="Reversable" unique_id=272623293]
+position = Vector2(-8, 0)
+
+[node name="left" type="CPUParticles2D" parent="Reversable/particles" unique_id=1282181884]
+emitting = false
+amount = 40
+lifetime = 2.0
+one_shot = true
+explosiveness = 1.0
+spread = 80.0
+gravity = Vector2(0, 600)
+initial_velocity_min = 100.0
+initial_velocity_max = 350.0
+scale_amount_max = 2.5
+
+[node name="right" type="CPUParticles2D" parent="Reversable/particles" unique_id=271214284]
+position = Vector2(16, 0)
+emitting = false
+amount = 40
+lifetime = 2.0
+one_shot = true
+explosiveness = 1.0
+direction = Vector2(-1, 0)
+spread = 80.0
+gravity = Vector2(0, 600)
+initial_velocity_min = 100.0
+initial_velocity_max = 350.0
+scale_amount_max = 2.5
+
+[node name="down" type="CPUParticles2D" parent="Reversable/particles" unique_id=788850856]
+position = Vector2(8, 8)
+emitting = false
+amount = 40
+lifetime = 2.0
+one_shot = true
+explosiveness = 1.0
+direction = Vector2(0, -1)
+spread = 80.0
+gravity = Vector2(0, 600)
+initial_velocity_min = 300.0
+initial_velocity_max = 600.0
+scale_amount_max = 2.5
+
+[node name="up" type="CPUParticles2D" parent="Reversable/particles" unique_id=622602415]
+position = Vector2(8, -8)
+emitting = false
+amount = 40
+lifetime = 2.0
+one_shot = true
+explosiveness = 1.0
+direction = Vector2(0, 1)
+spread = 80.0
+gravity = Vector2(0, 600)
+initial_velocity_min = 100.0
+initial_velocity_max = 350.0
+scale_amount_max = 2.5
 
 [node name="Hitbox" type="CollisionShape2D" parent="." unique_id=102091354]
 shape = SubResource("RectangleShape2D_cvnsp")

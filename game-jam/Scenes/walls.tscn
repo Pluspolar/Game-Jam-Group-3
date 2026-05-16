@@ -12,6 +12,7 @@ size = Vector2(641.5, 75.5)
 [node name="walls" type="Node2D" unique_id=1711967700]
 
 [node name="StaticBody2D" type="StaticBody2D" parent="." unique_id=1450740496]
+collision_layer = 2
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="StaticBody2D" unique_id=177588032]
 position = Vector2(251.25, 519)

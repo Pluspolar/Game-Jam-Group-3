@@ -16,15 +16,16 @@ func _physics_process(delta: float) -> void:
 
 	velocity.x *= 0.985 / delta * delta
 	var can_climb : bool = Input.is_action_pressed("climb") and abs(position.x-Global.string_target.x) < 13
-	var dir_to_mouse : Vector2 = position.direction_to(Global.string_target)
+	#var dir_to_mouse : Vector2 = position.direction_to(Global.string_target)
 	
-	if can_climb:
+	#if can_climb:
 		#position.direction_to(get_viewport().get_mouse_position())
-		velocity.x += delta * dir_to_mouse.x * 300
+		#velocity.x += delta * dir_to_mouse.x * 300
 		
 	#var temp_vel_y : float = delta * dir_to_mouse.y * 100
-	if can_climb and Global.is_swinging and position.y > Global.string_target.y and velocity.y + position.y > Global.string_target.y and abs(velocity.x) + abs(velocity.y) <= 200:
-		velocity.x *= 0.95 / delta * delta 
+	if can_climb and Global.is_swinging and position.y > Global.string_target.y and velocity.y*0.4 + position.y > Global.string_target.y and abs(velocity.x) + abs(velocity.y) <= 200:
+		velocity.x *= 0.94 / delta * delta 
+		velocity += position.direction_to(Global.string_target) * delta * 50
 	elif not (is_on_wall() and abs(get_wall_normal().x) <= 0.8):
 		velocity.y += 1000 * delta
 	#position += velocity * delta
@@ -67,6 +68,20 @@ func _physics_process(delta: float) -> void:
 		
 	move_and_slide()
 		
+	
+	if abs(old_vel.x)*0.5 + abs(old_vel.y) >= 1000:
+		if is_on_ceiling():
+			$Reversable/particles/up.emitting = true
+		if is_on_floor():
+			$Reversable/particles/down.emitting = true
+		
+	if abs(old_vel.x) + abs(old_vel.y)*0.5 > 1250:
+		if is_on_wall():
+			if get_wall_normal().x < 0:
+				$Reversable/particles/right.emitting = true
+			else:
+				$Reversable/particles/left.emitting = true
+		
 	if is_on_wall() and abs(old_vel.x) + abs(old_vel.y)*0.5 > 1250 and not already_on_wall:
 		velocity.x = old_vel.x*-0.1
 		already_on_wall = true
@@ -85,6 +100,10 @@ func _physics_process(delta: float) -> void:
 	else:
 		is_sticking = false
 		
+	if abs(velocity.x) > get_parent().speed_limit : velocity.x = get_parent().speed_limit * abs(velocity.x)/velocity.x
+	if abs(velocity.y) > get_parent().speed_limit : velocity.y = get_parent().speed_limit * abs(velocity.y)/velocity.y
+
+	if position.x < 0 or position.x > get_viewport().size.x: position.x = get_viewport().size.x/2
 	#print(velocity.x)
 	
 	

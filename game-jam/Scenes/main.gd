@@ -2,6 +2,8 @@ extends Node2D
 var line: Line2D
 
 @onready var player := $Player
+@onready var cam := $Cam
+@onready var raycast := $RayCast
 @export var string_amount : float = 40 #Use Even Number
 @export var stretchiness : float = 400
 @export var x_stretch : float = 0.75  #it's better to be between 0-1, it streches more based on the x axis
@@ -10,6 +12,8 @@ var line: Line2D
 @export var speed_limit: float = 10000
 @export var string_power: float = 1.5
 
+var last_raycast_point : Vector2 = Vector2(0,0)
+var global_mouse_pos : Vector2
 var strecth_amount : float = 0
 #var mouse_point : Vector2
 var distance : float
@@ -43,6 +47,8 @@ func create_line(player_pos: Vector2):
 	line.add_point(Global.string_target)
 	
 func _process(delta: float) -> void:
+	global_mouse_pos = get_global_mouse_position()
+	
 	if Global.is_swinging:
 		var dir_vel = player.position.direction_to(Global.string_target)
 		
@@ -58,7 +64,29 @@ func _process(delta: float) -> void:
 		
 		#print(angle)
 		#print(player.velocity)
-		
 	else:
 		line.clear_points()
-	print(Global.string_target)
+	
+	var cam_interpolation : float = 0.1*(1+(pow(abs(player.velocity.y), 1.2)*0.001))
+	var player_velocity_limit : float = player.velocity.y
+	player_velocity_limit /= 1+(player_velocity_limit*0.0003)
+	player_velocity_limit = player_velocity_limit*0.1 + player.position.y + (get_viewport().get_mouse_position().y-(get_viewport().size.y/2))*0.2
+	if cam_interpolation < 1: cam.position.y += (player_velocity_limit - cam.position.y) * cam_interpolation / delta * delta
+	else: cam.position.y = player_velocity_limit
+
+	raycast.global_position = player.global_position
+	raycast.target_position = global_mouse_pos - player.global_position
+	#print(raycast.get_collision_point())
+	
+
+func _unhandled_input(event: InputEvent) -> void:
+	if event.is_action_pressed("shoot"):
+		if raycast.is_colliding(): 
+			Global.string_target = raycast.get_collision_point()
+			Global.is_swinging = true
+		elif $Silky_wall.mouse_entered: 
+			Global.string_target = global_mouse_pos
+			Global.is_swinging = true
+	
+		
+		

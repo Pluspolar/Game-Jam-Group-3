@@ -1,0 +1,24 @@
+[gd_scene format=3 uid="uid://5lm2bec2knbt"]
+
+[ext_resource type="Script" uid="uid://tc5g17765dcb" path="res://Scenes/silky_wall.gd" id="1_nuyfb"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_ejt2b"]
+size = Vector2(187.25, 140)
+
+[node name="Silky_wall" type="Node2D" unique_id=1590487600]
+script = ExtResource("1_nuyfb")
+
+[node name="Area2D" type="Area2D" parent="." unique_id=1241750640]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D" unique_id=63619849]
+position = Vector2(356, 224)
+shape = SubResource("RectangleShape2D_ejt2b")
+debug_color = Color(0.55757344, 0.5340342, 0.48370427, 0.41960785)
+
+[node name="CollisionShape2D2" type="CollisionShape2D" parent="Area2D" unique_id=2097048960]
+position = Vector2(963.375, 429)
+shape = SubResource("RectangleShape2D_ejt2b")
+debug_color = Color(0.55757344, 0.5340342, 0.48370427, 0.41960785)
+
+[connection signal="mouse_entered" from="Area2D" to="." method="_on_area_2d_mouse_entered"]
+[connection signal="mouse_exited" from="Area2D" to="." method="_on_area_2d_mouse_exited"]
