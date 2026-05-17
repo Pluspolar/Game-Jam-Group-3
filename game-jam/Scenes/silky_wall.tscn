@@ -8,17 +8,18 @@ size = Vector2(187.25, 140)
 [node name="Silky_wall" type="Node2D" unique_id=1590487600]
 script = ExtResource("1_nuyfb")
 
-[node name="Area2D" type="Area2D" parent="." unique_id=1241750640]
+[node name="silky_wall" type="Area2D" parent="." unique_id=1241750640]
+collision_layer = 5
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D" unique_id=63619849]
+[node name="CollisionShape2D" type="CollisionShape2D" parent="silky_wall" unique_id=63619849]
 position = Vector2(356, 224)
 shape = SubResource("RectangleShape2D_ejt2b")
 debug_color = Color(0.55757344, 0.5340342, 0.48370427, 0.41960785)
 
-[node name="CollisionShape2D2" type="CollisionShape2D" parent="Area2D" unique_id=2097048960]
+[node name="CollisionShape2D2" type="CollisionShape2D" parent="silky_wall" unique_id=2097048960]
 position = Vector2(963.375, 429)
 shape = SubResource("RectangleShape2D_ejt2b")
 debug_color = Color(0.55757344, 0.5340342, 0.48370427, 0.41960785)
 
-[connection signal="mouse_entered" from="Area2D" to="." method="_on_area_2d_mouse_entered"]
-[connection signal="mouse_exited" from="Area2D" to="." method="_on_area_2d_mouse_exited"]
+[connection signal="mouse_entered" from="silky_wall" to="." method="_on_silky_wall_mouse_entered"]
+[connection signal="mouse_exited" from="silky_wall" to="." method="_on_silky_wall_mouse_exited"]

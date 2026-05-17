@@ -3,7 +3,8 @@ var line: Line2D
 
 @onready var player := $Player
 @onready var cam := $Cam
-@onready var raycast := $RayCast
+@onready var raycast_wall := $RayCast_wall
+@onready var raycast_silky := $RayCast_silky
 @export var string_amount : float = 40 #Use Even Number
 @export var stretchiness : float = 400
 @export var x_stretch : float = 0.75  #it's better to be between 0-1, it streches more based on the x axis
@@ -11,6 +12,7 @@ var line: Line2D
 @export var vel_y_air_resist : float = 0.98 #to get the value
 @export var speed_limit: float = 10000
 @export var string_power: float = 1.5
+@export var player_range: float = 400.0
 
 var last_raycast_point : Vector2 = Vector2(0,0)
 var global_mouse_pos : Vector2
@@ -74,19 +76,24 @@ func _process(delta: float) -> void:
 	if cam_interpolation < 1: cam.position.y += (player_velocity_limit - cam.position.y) * cam_interpolation / delta * delta
 	else: cam.position.y = player_velocity_limit
 
-	raycast.global_position = player.global_position
-	raycast.target_position = global_mouse_pos - player.global_position
+	raycast_wall.global_position = player.global_position
+	raycast_wall.target_position = global_mouse_pos - raycast_wall.global_position
+	var dis_raycast_target = raycast_wall.global_position.distance_to(global_mouse_pos)
+	if dis_raycast_target > player_range:
+		raycast_wall.target_position = raycast_wall.global_position.direction_to(global_mouse_pos) * player_range
+		
+	raycast_silky.global_position = raycast_wall.global_position
+	raycast_silky.target_position = raycast_wall.target_position
 	#print(raycast.get_collision_point())
-	
 
 func _unhandled_input(event: InputEvent) -> void:
 	if event.is_action_pressed("shoot"):
-		if raycast.is_colliding(): 
-			Global.string_target = raycast.get_collision_point()
-			Global.is_swinging = true
-		elif $Silky_wall.mouse_entered: 
-			Global.string_target = global_mouse_pos
-			Global.is_swinging = true
-	
+		if raycast_wall.is_colliding() or raycast_silky.is_colliding(): 
+			if str(raycast_wall.get_collider()).containsn("wall"): 
+				Global.string_target = raycast_wall.get_collision_point()
+				Global.is_swinging = true
+			elif str(raycast_silky.get_collider()).containsn("silky_wall") and $Silky_wall.mouse_entered: 
+				Global.string_target = raycast_silky.target_position + raycast_silky.global_position
+				Global.is_swinging = true
 		
 		

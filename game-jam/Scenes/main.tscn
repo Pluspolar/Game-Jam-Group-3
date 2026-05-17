@@ -23,33 +23,40 @@ metadata/_edit_lock_ = true
 [node name="Cam" type="Camera2D" parent="." unique_id=1260990897]
 position = Vector2(640, 360)
 
-[node name="StaticBody2D" type="StaticBody2D" parent="Cam" unique_id=381503685]
+[node name="wall" type="StaticBody2D" parent="Cam" unique_id=381503685]
 position = Vector2(-640, -360)
 collision_layer = 2
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="Cam/StaticBody2D" unique_id=344616767]
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Cam/wall" unique_id=344616767]
 position = Vector2(53, 367)
 shape = SubResource("RectangleShape2D_8gbba")
 debug_color = Color(0.9775489, 0, 0.4069383, 0.41960785)
 
-[node name="CollisionShape2D2" type="CollisionShape2D" parent="Cam/StaticBody2D" unique_id=1038984307]
+[node name="CollisionShape2D2" type="CollisionShape2D" parent="Cam/wall" unique_id=1038984307]
 position = Vector2(1222, 364)
 shape = SubResource("RectangleShape2D_8gbba")
 debug_color = Color(0.9775489, 0, 0.4069383, 0.41960785)
 
-[node name="CollisionShape2D3" type="CollisionShape2D" parent="Cam/StaticBody2D" unique_id=1553283514]
+[node name="CollisionShape2D3" type="CollisionShape2D" parent="Cam/wall" unique_id=1553283514]
 position = Vector2(630.125, 927.25)
 shape = SubResource("RectangleShape2D_jjvhh")
 debug_color = Color(0.9764706, 0, 0.40784314, 0.41960785)
 
-[node name="CollisionShape2D4" type="CollisionShape2D" parent="Cam/StaticBody2D" unique_id=1714172986]
+[node name="CollisionShape2D4" type="CollisionShape2D" parent="Cam/wall" unique_id=1714172986]
 position = Vector2(636, -181)
 shape = SubResource("RectangleShape2D_jjvhh")
 debug_color = Color(0.9764706, 0, 0.40784314, 0.41960785)
 
-[node name="RayCast" type="RayCast2D" parent="." unique_id=259199551]
-visible = false
+[node name="RayCast_wall" type="RayCast2D" parent="." unique_id=259199551]
 target_position = Vector2(0, 0)
 collision_mask = 2
+hit_from_inside = true
+
+[node name="RayCast_silky" type="RayCast2D" parent="." unique_id=351340736]
+target_position = Vector2(0, 0)
+collision_mask = 4
+hit_from_inside = true
+collide_with_areas = true
+collide_with_bodies = false
 
 [node name="Silky_wall" parent="." unique_id=1590487600 instance=ExtResource("4_jjvhh")]

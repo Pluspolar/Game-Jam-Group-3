@@ -11,23 +11,23 @@ size = Vector2(641.5, 75.5)
 
 [node name="walls" type="Node2D" unique_id=1711967700]
 
-[node name="StaticBody2D" type="StaticBody2D" parent="." unique_id=1450740496]
+[node name="walls" type="StaticBody2D" parent="." unique_id=1450740496]
 collision_layer = 2
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="StaticBody2D" unique_id=177588032]
+[node name="CollisionShape2D" type="CollisionShape2D" parent="walls" unique_id=177588032]
 position = Vector2(251.25, 519)
 shape = SubResource("RectangleShape2D_kjpe2")
 
-[node name="CollisionShape2D2" type="CollisionShape2D" parent="StaticBody2D" unique_id=1872085227]
+[node name="CollisionShape2D2" type="CollisionShape2D" parent="walls" unique_id=1872085227]
 position = Vector2(1076, 288)
 shape = SubResource("RectangleShape2D_2bj67")
 
-[node name="CollisionShape2D3" type="CollisionShape2D" parent="StaticBody2D" unique_id=1714195076]
+[node name="CollisionShape2D3" type="CollisionShape2D" parent="walls" unique_id=1714195076]
 position = Vector2(567, 89)
 shape = SubResource("RectangleShape2D_cxhnf")
 
-[node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="StaticBody2D" unique_id=1798771787]
+[node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="walls" unique_id=1798771787]
 polygon = PackedVector2Array(81, 298, 204, 440, 18, 443, 20, 44)
 
-[node name="CollisionPolygon2D2" type="CollisionPolygon2D" parent="StaticBody2D" unique_id=174035049]
+[node name="CollisionPolygon2D2" type="CollisionPolygon2D" parent="walls" unique_id=174035049]
 polygon = PackedVector2Array(369, 568, 652, 512, 654, 568)
