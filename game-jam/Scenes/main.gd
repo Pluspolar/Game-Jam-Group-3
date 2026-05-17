@@ -92,8 +92,6 @@ func _unhandled_input(event: InputEvent) -> void:
 			if str(raycast_wall.get_collider()).containsn("wall"): 
 				Global.string_target = raycast_wall.get_collision_point()
 				Global.is_swinging = true
-			elif str(raycast_silky.get_collider()).containsn("silky_wall") and $Silky_wall.mouse_entered: 
+			elif raycast_silky.global_position + raycast_silky.target_position == global_mouse_pos and str(raycast_silky.get_collider()).containsn("silky_wall") and $Silky_wall.mouse_entered: 
 				Global.string_target = raycast_silky.target_position + raycast_silky.global_position
 				Global.is_swinging = true
-		
-		
