@@ -24,7 +24,8 @@ func _physics_process(delta: float) -> void:
 		
 	#var temp_vel_y : float = delta * dir_to_mouse.y * 100
 	if can_climb and Global.is_swinging and position.y > Global.string_target.y and velocity.y*0.4 + position.y > Global.string_target.y and abs(velocity.x) + abs(velocity.y) <= 200:
-		velocity.x *= 0.94 / delta * delta 
+		#velocity.x *= 0.94 / delta * delta 
+		velocity.x *= 0.92 / delta * delta 
 		velocity += position.direction_to(Global.string_target) * delta * 50
 	elif not (is_on_wall() and abs(get_wall_normal().x) <= 0.8):
 		velocity.y += 1000 * delta
@@ -71,16 +72,16 @@ func _physics_process(delta: float) -> void:
 	
 	if abs(old_vel.x)*0.5 + abs(old_vel.y) >= 1000:
 		if is_on_ceiling():
-			$Reversable/particles/up.emitting = true
+			$Reversable/particles/up.restart()
 		if is_on_floor():
-			$Reversable/particles/down.emitting = true
+			$Reversable/particles/down.restart()
 		
 	if abs(old_vel.x) + abs(old_vel.y)*0.5 > 1250:
 		if is_on_wall():
 			if get_wall_normal().x < 0:
-				$Reversable/particles/right.emitting = true
+				$Reversable/particles/right.restart()
 			else:
-				$Reversable/particles/left.emitting = true
+				$Reversable/particles/left.restart()
 		
 	if is_on_wall() and abs(old_vel.x) + abs(old_vel.y)*0.5 > 1250 and not already_on_wall:
 		velocity.x = old_vel.x*-0.1

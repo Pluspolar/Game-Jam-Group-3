@@ -2,6 +2,10 @@ extends Node
 
 var string_target: Vector2
 var is_swinging: bool = false
+var timer: float = 0
+
+func _process(delta: float) -> void:
+	timer += 100 * delta
 
 func _unhandled_input(event: InputEvent) -> void:
 	if event.is_action_pressed("jump") and is_swinging:

@@ -4,18 +4,15 @@
 [ext_resource type="PackedScene" uid="uid://cp63kc2ym1jcn" path="res://Scenes/player.tscn" id="1_jjgbg"]
 [ext_resource type="PackedScene" uid="uid://c3kjx72nr0ib0" path="res://Scenes/walls.tscn" id="3_8gbba"]
 [ext_resource type="PackedScene" uid="uid://5lm2bec2knbt" path="res://Scenes/silky_wall.tscn" id="4_jjvhh"]
+[ext_resource type="Script" uid="uid://dbh2j2tkidrss" path="res://Scenes/wall.gd" id="5_kry3j"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_8gbba"]
-size = Vector2(126, 1206)
-
-[sub_resource type="RectangleShape2D" id="RectangleShape2D_jjvhh"]
-size = Vector2(1324.25, 106.5)
+size = Vector2(126, 1922)
 
 [node name="main" type="Node2D" unique_id=1425132053]
 script = ExtResource("1_bo1nx")
-
-[node name="Player" parent="." unique_id=38737271 instance=ExtResource("1_jjgbg")]
-position = Vector2(640, 361)
+stretchiness = 350.0
+string_power = 1.75
 
 [node name="walls" parent="." unique_id=1711967700 instance=ExtResource("3_8gbba")]
 metadata/_edit_lock_ = true
@@ -23,40 +20,21 @@ metadata/_edit_lock_ = true
 [node name="Cam" type="Camera2D" parent="." unique_id=1260990897]
 position = Vector2(640, 360)
 
-[node name="wall" type="StaticBody2D" parent="Cam" unique_id=381503685]
-position = Vector2(-640, -360)
-collision_layer = 2
-
-[node name="CollisionShape2D" type="CollisionShape2D" parent="Cam/wall" unique_id=344616767]
-position = Vector2(53, 367)
-shape = SubResource("RectangleShape2D_8gbba")
-debug_color = Color(0.9775489, 0, 0.4069383, 0.41960785)
-
-[node name="CollisionShape2D2" type="CollisionShape2D" parent="Cam/wall" unique_id=1038984307]
-position = Vector2(1222, 364)
-shape = SubResource("RectangleShape2D_8gbba")
-debug_color = Color(0.9775489, 0, 0.4069383, 0.41960785)
-
-[node name="CollisionShape2D3" type="CollisionShape2D" parent="Cam/wall" unique_id=1553283514]
-position = Vector2(630.125, 927.25)
-shape = SubResource("RectangleShape2D_jjvhh")
-debug_color = Color(0.9764706, 0, 0.40784314, 0.41960785)
-
-[node name="CollisionShape2D4" type="CollisionShape2D" parent="Cam/wall" unique_id=1714172986]
-position = Vector2(636, -181)
-shape = SubResource("RectangleShape2D_jjvhh")
-debug_color = Color(0.9764706, 0, 0.40784314, 0.41960785)
-
-[node name="RayCast_wall" type="RayCast2D" parent="." unique_id=259199551]
-target_position = Vector2(0, 0)
-collision_mask = 2
-hit_from_inside = true
-
-[node name="RayCast_silky" type="RayCast2D" parent="." unique_id=351340736]
-target_position = Vector2(0, 0)
-collision_mask = 4
-hit_from_inside = true
-collide_with_areas = true
-collide_with_bodies = false
-
 [node name="Silky_wall" parent="." unique_id=1590487600 instance=ExtResource("4_jjvhh")]
+
+[node name="wall" type="CharacterBody2D" parent="." unique_id=874098348]
+collision_layer = 2
+script = ExtResource("5_kry3j")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="wall" unique_id=344616767]
+position = Vector2(66, 357)
+shape = SubResource("RectangleShape2D_8gbba")
+debug_color = Color(0.9775489, 0, 0.4069383, 0.41960785)
+
+[node name="CollisionShape2D2" type="CollisionShape2D" parent="wall" unique_id=1038984307]
+position = Vector2(1220, 345)
+shape = SubResource("RectangleShape2D_8gbba")
+debug_color = Color(0.9775489, 0, 0.4069383, 0.41960785)
+
+[node name="Player" parent="." unique_id=38737271 instance=ExtResource("1_jjgbg")]
+position = Vector2(640, 361)

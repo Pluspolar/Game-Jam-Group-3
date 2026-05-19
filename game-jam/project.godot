@@ -11,7 +11,7 @@ config_version=5
 [application]
 
 config/name="Game_Jam"
-run/main_scene="uid://daeno82nw8grw"
+run/main_scene="uid://exegsfccfjbt"
 config/features=PackedStringArray("4.6", "GL Compatibility")
 config/icon="res://icon.svg"
 
@@ -23,6 +23,7 @@ Global="*uid://gb22o8m1nwxb"
 
 window/size/viewport_width=1280
 window/size/viewport_height=720
+window/stretch/mode="viewport"
 
 [input]
 
