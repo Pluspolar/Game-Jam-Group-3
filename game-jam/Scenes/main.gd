@@ -79,7 +79,6 @@ func _process(delta: float) -> void:
 	player_velocity_limit = player_velocity_limit*0.1 + player.position.y + (get_viewport().get_mouse_position().y-(get_viewport().size.y/2))*0.2
 	if cam_interpolation < 1: old_cam.y += (player_velocity_limit - old_cam.y) * cam_interpolation / delta * delta
 	else: old_cam.y = player_velocity_limit
-	old_cam.y = player_velocity_limit
 	cam.position = old_cam
 	cam.position += cam_wobble
 

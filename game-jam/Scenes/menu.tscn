@@ -1,7 +1,9 @@
 [gd_scene format=3 uid="uid://exegsfccfjbt"]
 
 [ext_resource type="FontFile" uid="uid://cyge4tlc7d2iw" path="res://pixel font/dogicapixelbold.ttf" id="2_cayip"]
-[ext_resource type="Script" uid="uid://bqgqkdyg4ricy" path="res://Scenes/button.gd" id="2_xhh6f"]
+[ext_resource type="Script" uid="uid://b8k4vrntewvfh" path="res://Scenes/start_button.gd" id="2_xhh6f"]
+[ext_resource type="Script" uid="uid://ts3bspt2fsjp" path="res://Scenes/quit_button.gd" id="3_cayip"]
+[ext_resource type="Script" uid="uid://dwd44u2u3o3fg" path="res://Scenes/game_title.gd" id="4_158mb"]
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_1rerr"]
 bg_color = Color(0.4149491, 0.4149491, 0.4149491, 1)
@@ -39,28 +41,35 @@ shadow_color = Color(0.11858138, 0.11858138, 0.11858138, 0.6)
 shadow_size = 9
 shadow_offset = Vector2(15, 15)
 
+[sub_resource type="LabelSettings" id="LabelSettings_cayip"]
+font = ExtResource("2_cayip")
+font_size = 50
+shadow_size = 11
+shadow_color = Color(0, 0, 0, 0.28235295)
+shadow_offset = Vector2(5, 5)
+
 [node name="menu" type="Node2D" unique_id=1093129808]
 
 [node name="CanvasLayer" type="CanvasLayer" parent="." unique_id=1829473894]
 
-[node name="Button" type="Button" parent="CanvasLayer" unique_id=240006197]
+[node name="Start_button" type="Button" parent="CanvasLayer" unique_id=240006197]
 anchors_preset = -1
-anchor_left = 0.40859374
-anchor_top = 0.45277783
-anchor_right = 0.5914062
-anchor_bottom = 0.5472222
+anchor_left = 0.39140624
+anchor_top = 0.43611112
+anchor_right = 0.60859376
+anchor_bottom = 0.5638889
 offset_left = -58.0
-offset_top = -19.0
+offset_top = -43.0
 offset_right = 58.0
-offset_bottom = 17.0
+offset_bottom = -7.0
 grow_horizontal = 2
 grow_vertical = 2
-pivot_offset = Vector2(175, 51.99997)
+pivot_offset = Vector2(196, 66)
 theme_override_colors/font_pressed_color = Color(0.2, 0.2, 0.2, 1)
 theme_override_colors/font_outline_color = Color(0.52906674, 0.52906674, 0.52906656, 1)
 theme_override_constants/outline_size = 20
 theme_override_fonts/font = ExtResource("2_cayip")
-theme_override_font_sizes/font_size = 52
+theme_override_font_sizes/font_size = 67
 theme_override_styles/normal = SubResource("StyleBoxFlat_1rerr")
 theme_override_styles/pressed = SubResource("StyleBoxFlat_cayip")
 theme_override_styles/hover = SubResource("StyleBoxFlat_xhh6f")
@@ -69,6 +78,50 @@ icon_alignment = 1
 script = ExtResource("2_xhh6f")
 metadata/_edit_use_anchors_ = true
 
-[connection signal="button_down" from="CanvasLayer/Button" to="CanvasLayer/Button" method="_on_button_down"]
-[connection signal="mouse_entered" from="CanvasLayer/Button" to="CanvasLayer/Button" method="_on_mouse_entered"]
-[connection signal="mouse_exited" from="CanvasLayer/Button" to="CanvasLayer/Button" method="_on_mouse_exited"]
+[node name="Quit_Button" type="Button" parent="CanvasLayer" unique_id=1241282313]
+anchors_preset = 7
+anchor_left = 0.5
+anchor_top = 1.0
+anchor_right = 0.5
+anchor_bottom = 1.0
+offset_left = -128.0
+offset_top = -251.0
+offset_right = 128.0
+offset_bottom = -153.0
+grow_horizontal = 2
+grow_vertical = 0
+pivot_offset = Vector2(129, 52)
+theme_override_colors/font_pressed_color = Color(0.2, 0.2, 0.2, 1)
+theme_override_colors/font_outline_color = Color(0.52906674, 0.52906674, 0.52906656, 1)
+theme_override_constants/outline_size = 20
+theme_override_fonts/font = ExtResource("2_cayip")
+theme_override_font_sizes/font_size = 52
+theme_override_styles/normal = SubResource("StyleBoxFlat_1rerr")
+theme_override_styles/pressed = SubResource("StyleBoxFlat_cayip")
+theme_override_styles/hover = SubResource("StyleBoxFlat_xhh6f")
+text = "QUIT"
+icon_alignment = 1
+script = ExtResource("3_cayip")
+
+[node name="Game_Title" type="Label" parent="CanvasLayer" unique_id=1344259479]
+anchors_preset = 5
+anchor_left = 0.5
+anchor_right = 0.5
+offset_left = -394.0
+offset_top = 102.0
+offset_right = 394.0
+offset_bottom = 207.0
+grow_horizontal = 2
+pivot_offset = Vector2(399, 52)
+text = "SPIDEY THE SPIDER"
+label_settings = SubResource("LabelSettings_cayip")
+horizontal_alignment = 1
+vertical_alignment = 1
+script = ExtResource("4_158mb")
+
+[connection signal="button_down" from="CanvasLayer/Start_button" to="CanvasLayer/Start_button" method="_on_button_down"]
+[connection signal="mouse_entered" from="CanvasLayer/Start_button" to="CanvasLayer/Start_button" method="_on_mouse_entered"]
+[connection signal="mouse_exited" from="CanvasLayer/Start_button" to="CanvasLayer/Start_button" method="_on_mouse_exited"]
+[connection signal="button_down" from="CanvasLayer/Quit_Button" to="CanvasLayer/Quit_Button" method="_on_button_down"]
+[connection signal="mouse_entered" from="CanvasLayer/Quit_Button" to="CanvasLayer/Quit_Button" method="_on_mouse_entered"]
+[connection signal="mouse_exited" from="CanvasLayer/Quit_Button" to="CanvasLayer/Quit_Button" method="_on_mouse_exited"]

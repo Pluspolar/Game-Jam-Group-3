@@ -7,18 +7,17 @@ var target_scale : float = 1
 func _process(delta: float) -> void:
 	if mouse_enter:
 		target_scale = 1.15
-		rotation_degrees += ((0+speed_scale*300) - rotation_degrees) * 0.5 / delta * delta
-		if speed_scale <= 0.1:
-			rotation_degrees += (sin(Global.timer/12) * 5 - rotation_degrees) * 0.2 / delta * delta
+		#if speed_scale <= 0.04:
+		#	rotation_degrees += (sin(Global.timer/12) * 5 - rotation_degrees) * 0.2 / delta * delta
 	else: 
 		target_scale = 1
-		rotation_degrees += ((0+speed_scale*300) - rotation_degrees) * 0.5 / delta * delta
+		#rotation_degrees += ((0+speed_scale*300) - rotation_degrees) * 0.5 / delta * delta
 	
+	rotation_degrees += ((0+speed_scale*300+(sin(Global.timer/24)*2)) - rotation_degrees) * 0.5 / delta * delta
 	speed_scale = (((target_scale-scale.x) * 0.2) + (speed_scale * 0.6)) / delta * delta
 	#speed_scale = ((target_scale-scale.x) * 0.15)
 	scale += Vector2(speed_scale, speed_scale)
 	
-	print(speed_scale)
 func _on_mouse_entered() -> void:
 	mouse_enter = true
 
@@ -27,4 +26,4 @@ func _on_mouse_exited() -> void:
 
 func _on_button_down() -> void:
 	await get_tree().create_timer(0.05).timeout
-	get_tree().change_scene_to_file("res://Scenes/main.tscn")
+	get_tree().quit()
