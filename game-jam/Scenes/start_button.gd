@@ -13,7 +13,7 @@ func _process(delta: float) -> void:
 		target_scale = 1
 	
 	rotation_degrees += ((0+speed_scale*300+(sin(Global.timer/24)*2)) - rotation_degrees) * 0.5 * 60 * delta
-	speed_scale = (((target_scale-scale.x) * 0.2) + (speed_scale * 0.6)) * 60 * delta
+	speed_scale = (((target_scale-scale.x) * 0.2) + (speed_scale * 0.6))
 	#speed_scale = ((target_scale-scale.x) * 0.15)
 	scale += Vector2(speed_scale, speed_scale) * 60 * delta
 	
