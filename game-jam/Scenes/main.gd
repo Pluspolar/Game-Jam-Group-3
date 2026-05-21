@@ -60,7 +60,7 @@ func _process(delta: float) -> void:
 		distance = pow(distance, 2)
 		
 		player.velocity += Vector2(dir_vel.x * distance/50, dir_vel.y * distance/50) * delta * string_power
-		if abs(player.velocity.y) > vel_y_pitfall: player.velocity.y *= vel_y_air_resist / delta * delta #Patched infinite energy
+		if abs(player.velocity.y) > vel_y_pitfall: player.velocity.y *= vel_y_air_resist * 60 * delta #Patched infinite energy
 		
 		if abs(player.velocity.x) > speed_limit: player.velocity.x = speed_limit * abs(player.velocity.x)/player.velocity.x
 		if abs(player.velocity.y) > speed_limit: player.velocity.y = speed_limit * abs(player.velocity.y)/player.velocity.y
@@ -77,7 +77,7 @@ func _process(delta: float) -> void:
 	var player_velocity_limit : float = player.velocity.y
 	player_velocity_limit /= 1+(player_velocity_limit*0.0003)
 	player_velocity_limit = player_velocity_limit*0.1 + player.position.y + (get_viewport().get_mouse_position().y-(get_viewport().size.y/2))*0.2
-	if cam_interpolation < 1: old_cam.y += (player_velocity_limit - old_cam.y) * cam_interpolation / delta * delta
+	if cam_interpolation < 1: old_cam.y += (player_velocity_limit - old_cam.y) * cam_interpolation * 60 * delta
 	else: old_cam.y = player_velocity_limit
 	cam.position = old_cam
 	cam.position += cam_wobble

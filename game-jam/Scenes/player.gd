@@ -14,7 +14,7 @@ func _physics_process(delta: float) -> void:
 	#position.y += ((int(Input.is_action_pressed("up"))*-1) + (int(Input.is_action_pressed("down")))) * delta * speed
 	#position.x += ((int(Input.is_action_pressed("left"))*-1) + (int(Input.is_action_pressed("right")))) * delta * speed
 
-	velocity.x *= 0.985 / delta * delta
+	velocity.x *= 0.985 * 60 * delta
 	var can_climb : bool = Input.is_action_pressed("climb") and abs(position.x-Global.string_target.x) < 13
 	#var dir_to_mouse : Vector2 = position.direction_to(Global.string_target)
 	
@@ -24,8 +24,8 @@ func _physics_process(delta: float) -> void:
 		
 	#var temp_vel_y : float = delta * dir_to_mouse.y * 100
 	if can_climb and Global.is_swinging and position.y > Global.string_target.y and velocity.y*0.4 + position.y > Global.string_target.y and abs(velocity.x) + abs(velocity.y) <= 200:
-		#velocity.x *= 0.94 / delta * delta 
-		velocity.x *= 0.92 / delta * delta 
+		#velocity.x *= 0.94 * 60 * delta 
+		velocity.x *= 0.92 * 60 * delta 
 		velocity += position.direction_to(Global.string_target) * delta * 50
 	elif not (is_on_wall() and abs(get_wall_normal().x) <= 0.8):
 		velocity.y += 1000 * delta
@@ -37,10 +37,10 @@ func _physics_process(delta: float) -> void:
 		velocity.y = 0
 	
 	if is_on_wall_only():
-		velocity.y *= 0.4 / delta * delta
+		velocity.y *= 0.4 * 60 * delta
 	
 	if is_on_floor() or is_on_ceiling(): #or (is_on_wall() and abs(get_wall_normal().x) <= 0.8):
-		velocity.x *= 0.945 / delta * delta
+		velocity.x *= 0.945 * 60 * delta
 		velocity.x += ((int(Input.is_action_pressed("left"))*-1) + (int(Input.is_action_pressed("right")))) * delta * speed
 	else: velocity.x += 0.2 * ((int(Input.is_action_pressed("left"))*-1) + (int(Input.is_action_pressed("right")))) * delta * speed
 		

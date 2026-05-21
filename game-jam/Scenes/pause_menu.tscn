@@ -1,0 +1,123 @@
+[gd_scene format=3 uid="uid://do3vlts7xldav"]
+
+[ext_resource type="FontFile" uid="uid://cyge4tlc7d2iw" path="res://pixel font/dogicapixelbold.ttf" id="1_emv3i"]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_k0w1u"]
+bg_color = Color(0.4149491, 0.4149491, 0.4149491, 1)
+border_width_left = 10
+border_width_top = 10
+border_width_right = 10
+border_width_bottom = 10
+border_color = Color(0.23753911, 0.23753914, 0.23753911, 1)
+corner_detail = 2
+shadow_color = Color(0.11858138, 0.11858138, 0.11858138, 0.6)
+shadow_size = 9
+shadow_offset = Vector2(15, 15)
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_1och7"]
+bg_color = Color(0.16206548, 0.16206563, 0.16206554, 1)
+border_width_left = 10
+border_width_top = 10
+border_width_right = 10
+border_width_bottom = 10
+border_color = Color(0.6789437, 0.6789437, 0.6789436, 1)
+corner_detail = 2
+shadow_color = Color(0.11858138, 0.11858138, 0.11858138, 0.6)
+shadow_size = 9
+shadow_offset = Vector2(15, 15)
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_bpi0q"]
+bg_color = Color(0.27387273, 0.27387273, 0.27387273, 1)
+border_width_left = 10
+border_width_top = 10
+border_width_right = 10
+border_width_bottom = 10
+border_color = Color(0.3647059, 0.3647059, 0.3647059, 1)
+corner_detail = 2
+shadow_color = Color(0.11858138, 0.11858138, 0.11858138, 0.6)
+shadow_size = 9
+shadow_offset = Vector2(15, 15)
+
+[sub_resource type="LabelSettings" id="LabelSettings_vmyb1"]
+font = ExtResource("1_emv3i")
+font_size = 50
+shadow_size = 11
+shadow_color = Color(0, 0, 0, 0.28235295)
+shadow_offset = Vector2(5, 5)
+
+[node name="pause_menu" type="Node2D" unique_id=33435242]
+
+[node name="CanvasLayer" type="CanvasLayer" parent="." unique_id=154909591]
+
+[node name="Start_button" type="Button" parent="CanvasLayer" unique_id=1032090592]
+anchors_preset = -1
+anchor_left = 0.39140624
+anchor_top = 0.43611112
+anchor_right = 0.60859376
+anchor_bottom = 0.5638889
+offset_left = -58.0
+offset_top = -43.0
+offset_right = 58.0
+offset_bottom = -7.0
+grow_horizontal = 2
+grow_vertical = 2
+pivot_offset = Vector2(196, 66)
+theme_override_colors/font_pressed_color = Color(0.2, 0.2, 0.2, 1)
+theme_override_colors/font_outline_color = Color(0.52906674, 0.52906674, 0.52906656, 1)
+theme_override_constants/outline_size = 20
+theme_override_fonts/font = ExtResource("1_emv3i")
+theme_override_font_sizes/font_size = 67
+theme_override_styles/normal = SubResource("StyleBoxFlat_k0w1u")
+theme_override_styles/pressed = SubResource("StyleBoxFlat_1och7")
+theme_override_styles/hover = SubResource("StyleBoxFlat_bpi0q")
+text = "START"
+icon_alignment = 1
+metadata/_edit_use_anchors_ = true
+
+[node name="Quit_Button" type="Button" parent="CanvasLayer" unique_id=766349345]
+anchors_preset = 7
+anchor_left = 0.5
+anchor_top = 1.0
+anchor_right = 0.5
+anchor_bottom = 1.0
+offset_left = -128.0
+offset_top = -251.0
+offset_right = 128.0
+offset_bottom = -153.0
+grow_horizontal = 2
+grow_vertical = 0
+pivot_offset = Vector2(129, 52)
+theme_override_colors/font_pressed_color = Color(0.2, 0.2, 0.2, 1)
+theme_override_colors/font_outline_color = Color(0.52906674, 0.52906674, 0.52906656, 1)
+theme_override_constants/outline_size = 20
+theme_override_fonts/font = ExtResource("1_emv3i")
+theme_override_font_sizes/font_size = 52
+theme_override_styles/normal = SubResource("StyleBoxFlat_k0w1u")
+theme_override_styles/pressed = SubResource("StyleBoxFlat_1och7")
+theme_override_styles/hover = SubResource("StyleBoxFlat_bpi0q")
+text = "QUIT"
+icon_alignment = 1
+metadata/_edit_use_anchors_ = true
+
+[node name="Game_Title" type="Label" parent="CanvasLayer" unique_id=862729166]
+anchors_preset = 5
+anchor_left = 0.5
+anchor_right = 0.5
+offset_left = -394.0
+offset_top = 102.0
+offset_right = 394.0
+offset_bottom = 207.0
+grow_horizontal = 2
+pivot_offset = Vector2(399, 52)
+text = "SPIDEY THE SPIDER"
+label_settings = SubResource("LabelSettings_vmyb1")
+horizontal_alignment = 1
+vertical_alignment = 1
+metadata/_edit_use_anchors_ = true
+
+[connection signal="button_down" from="CanvasLayer/Start_button" to="CanvasLayer/Start_button" method="_on_button_down"]
+[connection signal="mouse_entered" from="CanvasLayer/Start_button" to="CanvasLayer/Start_button" method="_on_mouse_entered"]
+[connection signal="mouse_exited" from="CanvasLayer/Start_button" to="CanvasLayer/Start_button" method="_on_mouse_exited"]
+[connection signal="button_down" from="CanvasLayer/Quit_Button" to="CanvasLayer/Quit_Button" method="_on_button_down"]
+[connection signal="mouse_entered" from="CanvasLayer/Quit_Button" to="CanvasLayer/Quit_Button" method="_on_mouse_entered"]
+[connection signal="mouse_exited" from="CanvasLayer/Quit_Button" to="CanvasLayer/Quit_Button" method="_on_mouse_exited"]
