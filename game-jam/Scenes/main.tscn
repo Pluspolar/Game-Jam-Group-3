@@ -22,16 +22,16 @@ position = Vector2(640, 360)
 
 [node name="Silky_wall" parent="." unique_id=1590487600 instance=ExtResource("4_jjvhh")]
 
-[node name="wall" type="CharacterBody2D" parent="." unique_id=874098348]
+[node name="solid_wall" type="CharacterBody2D" parent="." unique_id=874098348]
 collision_layer = 2
 script = ExtResource("5_kry3j")
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="wall" unique_id=344616767]
+[node name="CollisionShape2D" type="CollisionShape2D" parent="solid_wall" unique_id=344616767]
 position = Vector2(66, 357)
 shape = SubResource("RectangleShape2D_8gbba")
 debug_color = Color(0.9775489, 0, 0.4069383, 0.41960785)
 
-[node name="CollisionShape2D2" type="CollisionShape2D" parent="wall" unique_id=1038984307]
+[node name="CollisionShape2D2" type="CollisionShape2D" parent="solid_wall" unique_id=1038984307]
 position = Vector2(1220, 345)
 shape = SubResource("RectangleShape2D_8gbba")
 debug_color = Color(0.9775489, 0, 0.4069383, 0.41960785)

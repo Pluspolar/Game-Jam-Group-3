@@ -68,6 +68,13 @@ climb={
 ]
 }
 
+[layer_names]
+
+3d_render/layer_1="All"
+3d_render/layer_3="Silky Wall"
+2d_physics/layer_1="All"
+2d_physics/layer_3="Silky Wall"
+
 [physics]
 
 3d/physics_engine="Jolt Physics"
