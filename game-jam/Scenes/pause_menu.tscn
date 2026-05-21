@@ -1,6 +1,6 @@
 [gd_scene format=3 uid="uid://do3vlts7xldav"]
 
-[ext_resource type="FontFile" uid="uid://cyge4tlc7d2iw" path="res://pixel font/dogicapixelbold.ttf" id="1_emv3i"]
+[ext_resource type="FontFile" uid="uid://cyge4tlc7d2iw" path="res://Sprites/pixel font/dogicapixelbold.ttf" id="1_emv3i"]
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_k0w1u"]
 bg_color = Color(0.4149491, 0.4149491, 0.4149491, 1)

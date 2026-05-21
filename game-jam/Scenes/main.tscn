@@ -3,10 +3,6 @@
 [ext_resource type="Script" uid="uid://c4ox0svdgy856" path="res://Scenes/main.gd" id="1_bo1nx"]
 [ext_resource type="PackedScene" uid="uid://cp63kc2ym1jcn" path="res://Scenes/player.tscn" id="1_jjgbg"]
 [ext_resource type="PackedScene" uid="uid://dcj8qiqwygmrp" path="res://Levels/level_test.tscn" id="4_jjvhh"]
-[ext_resource type="Script" uid="uid://dbh2j2tkidrss" path="res://Scenes/wall.gd" id="5_kry3j"]
-
-[sub_resource type="RectangleShape2D" id="RectangleShape2D_8gbba"]
-size = Vector2(331, 1922)
 
 [node name="main" type="Node2D" unique_id=1425132053]
 script = ExtResource("1_bo1nx")
@@ -15,21 +11,6 @@ string_power = 1.75
 
 [node name="Cam" type="Camera2D" parent="." unique_id=1260990897]
 position = Vector2(640, 360)
-
-[node name="solid_wall" type="CharacterBody2D" parent="." unique_id=874098348]
-visible = false
-collision_layer = 0
-script = ExtResource("5_kry3j")
-
-[node name="CollisionShape2D" type="CollisionShape2D" parent="solid_wall" unique_id=344616767]
-position = Vector2(-124.5, 357)
-shape = SubResource("RectangleShape2D_8gbba")
-debug_color = Color(0.9775489, 0, 0.4069383, 0.41960785)
-
-[node name="CollisionShape2D2" type="CollisionShape2D" parent="solid_wall" unique_id=1038984307]
-position = Vector2(1413, 345)
-shape = SubResource("RectangleShape2D_8gbba")
-debug_color = Color(0.9775489, 0, 0.4069383, 0.41960785)
 
 [node name="Player" parent="." unique_id=38737271 instance=ExtResource("1_jjgbg")]
 position = Vector2(669, 580)

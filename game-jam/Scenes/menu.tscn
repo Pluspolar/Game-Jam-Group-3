@@ -1,6 +1,6 @@
 [gd_scene format=3 uid="uid://exegsfccfjbt"]
 
-[ext_resource type="FontFile" uid="uid://cyge4tlc7d2iw" path="res://pixel font/dogicapixelbold.ttf" id="2_cayip"]
+[ext_resource type="FontFile" uid="uid://cyge4tlc7d2iw" path="res://Sprites/pixel font/dogicapixelbold.ttf" id="2_cayip"]
 [ext_resource type="Script" uid="uid://b8k4vrntewvfh" path="res://Scenes/start_button.gd" id="2_xhh6f"]
 [ext_resource type="Script" uid="uid://ts3bspt2fsjp" path="res://Scenes/quit_button.gd" id="3_cayip"]
 [ext_resource type="Script" uid="uid://dwd44u2u3o3fg" path="res://Scenes/game_title.gd" id="4_158mb"]

@@ -3,36 +3,24 @@ class_name Player
 
 @export var speed: float = 200
 
-var cast_entered : bool = false
 var already_on_wall : bool = false
 var is_sticking: bool = false
+var cast_entered: bool = false
 
 #func _ready() -> void:
 #	position = Vector2(640, 360)
 	
 func _physics_process(delta: float) -> void:
-	#var mouse_pos : Vector2 = get_viewport().get_mouse_position()
-	#position.y += ((int(Input.is_action_pressed("up"))*-1) + (int(Input.is_action_pressed("down")))) * delta * speed
-	#position.x += ((int(Input.is_action_pressed("left"))*-1) + (int(Input.is_action_pressed("right")))) * delta * speed
 
 	velocity.x *= pow(0.985, 60 * delta)
 	var can_climb : bool = Input.is_action_pressed("climb") and abs(position.x-Global.string_target.x) < 13
-	#var dir_to_mouse : Vector2 = position.direction_to(Global.string_target)
-	
-	#if can_climb:
-		#position.direction_to(get_viewport().get_mouse_position())
-		#velocity.x += delta * dir_to_mouse.x * 300
-		
-	#var temp_vel_y : float = delta * dir_to_mouse.y * 100
+
 	if can_climb and Global.is_swinging and position.y > Global.string_target.y and velocity.y*0.4 + position.y > Global.string_target.y and abs(velocity.x) + abs(velocity.y) <= 200:
 		#velocity.x *= 0.94 * 60 * delta 
 		velocity.x *= pow(0.92, 60 * delta)
 		velocity += position.direction_to(Global.string_target) * delta * 50
 	elif not (is_on_wall() and abs(get_wall_normal().x) <= 0.8):
 		velocity.y += 1000 * delta
-	#position += velocity * delta
-	
-	#print(abs(velocity.x) + abs(velocity.y))
 	
 	if is_sticking:
 		velocity.y = 0
@@ -62,15 +50,8 @@ func _physics_process(delta: float) -> void:
 		
 	var old_vel := velocity
 		
-		#velocity.y *= -1
-		#position.x += velocity.x
-			
-	#if (is_on_ceiling() or is_on_floor()) and abs(total_velocity) < 500:
-	#	velocity.y = 0
-		
 	move_and_slide()
 		
-	
 	if abs(old_vel.x)*0.5 + abs(old_vel.y) >= 1000:
 		if is_on_ceiling():
 			$Reversable/particles/up.restart()
@@ -101,7 +82,7 @@ func _physics_process(delta: float) -> void:
 			else: is_sticking = true
 	else:
 		is_sticking = false
-		
+
 	if abs(velocity.x) > get_parent().speed_limit : velocity.x = get_parent().speed_limit * abs(velocity.x)/velocity.x
 	if abs(velocity.y) > get_parent().speed_limit : velocity.y = get_parent().speed_limit * abs(velocity.y)/velocity.y
 
@@ -112,13 +93,6 @@ func _physics_process(delta: float) -> void:
 	if position.x > get_viewport().size.x:
 		position.x = get_viewport().size.x
 		velocity.x = old_vel.x*-0.5
-		
-	#if position.x < 0: 
-	#	position.x = get_viewport().size.x
-	#elif position.x > get_viewport().size.x:
-	#wwwwwwwwww	position.x = 0
-	#print(velocity.x)
-	
 
 func _on_cast_point_area_entered(area: Area2D) -> void:
 	cast_entered = true

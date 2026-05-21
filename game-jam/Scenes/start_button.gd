@@ -7,14 +7,11 @@ var target_scale : float = 1
 func _process(delta: float) -> void:
 	if mouse_enter:
 		target_scale = 1.15
-		#if speed_scale <= 0.04:
-		#	rotation_degrees += (sin(Global.timer/12) * 5 - rotation_degrees) * 0.2 * 60 * delta
 	else: 
 		target_scale = 1
 	
 	rotation_degrees += ((0+speed_scale*300+(sin(Global.timer/24)*2)) - rotation_degrees) * 0.5 * 60 * delta
 	speed_scale = (((target_scale-scale.x) * 0.2) + (speed_scale * 0.6))
-	#speed_scale = ((target_scale-scale.x) * 0.15)
 	scale += Vector2(speed_scale, speed_scale) * 60 * delta
 	
 func _on_mouse_entered() -> void:

@@ -1,0 +1,21 @@
+[gd_scene format=3 uid="uid://bvyd0uyoilwhb"]
+
+[ext_resource type="Script" uid="uid://dbh2j2tkidrss" path="res://prototype/wall.gd" id="1_whf0t"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_8gbba"]
+size = Vector2(331, 1922)
+
+[node name="solid_wall" type="CharacterBody2D" unique_id=1797800475]
+visible = false
+collision_layer = 0
+script = ExtResource("1_whf0t")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=1852534815]
+position = Vector2(-124.5, 357)
+shape = SubResource("RectangleShape2D_8gbba")
+debug_color = Color(0.9775489, 0, 0.4069383, 0.41960785)
+
+[node name="CollisionShape2D2" type="CollisionShape2D" parent="." unique_id=1230917331]
+position = Vector2(1413, 345)
+shape = SubResource("RectangleShape2D_8gbba")
+debug_color = Color(0.9775489, 0, 0.4069383, 0.41960785)
