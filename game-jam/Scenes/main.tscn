@@ -6,8 +6,9 @@
 
 [node name="main" type="Node2D" unique_id=1425132053]
 script = ExtResource("1_bo1nx")
-stretchiness = 350.0
+stretchiness = 200.0
 string_power = 1.75
+player_range = 360.0
 
 [node name="Cam" type="Camera2D" parent="." unique_id=1260990897]
 position = Vector2(640, 360)

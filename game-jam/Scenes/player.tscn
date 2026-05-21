@@ -19,7 +19,7 @@ animations = [{
 }]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_cvnsp"]
-size = Vector2(16, 16)
+size = Vector2(24, 24)
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_cvnsp"]
 radius = 1.0
@@ -32,7 +32,7 @@ speed = 500.0
 [node name="Reversable" type="Node2D" parent="." unique_id=62569021]
 
 [node name="AnimatedSprite" type="AnimatedSprite2D" parent="Reversable" unique_id=193856732]
-scale = Vector2(0.125, 0.12499999)
+scale = Vector2(0.188, 0.188)
 sprite_frames = SubResource("SpriteFrames_vgqql")
 
 [node name="particles" type="Node2D" parent="Reversable" unique_id=272623293]
