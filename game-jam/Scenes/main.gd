@@ -4,6 +4,7 @@ var line: Line2D
 @onready var player := $Player
 @onready var cam := $Cam
 @onready var raycast_wall := $Player/RayCast_wall
+@onready var raycast_point := $Player/cast_point/point
 @onready var raycast_silky := $Player/RayCast_silky
 @export var string_amount : float = 40 #Use Even Number
 @export var stretchiness : float = 400
@@ -88,6 +89,8 @@ func _process(delta: float) -> void:
 		raycast_wall.target_position = raycast_wall.global_position.direction_to(global_mouse_pos) * player_range
 		
 	raycast_silky.target_position = raycast_wall.target_position
+	raycast_point.position = raycast_wall.target_position
+	
 	
 	#print(raycast.get_collision_point())
 
@@ -97,6 +100,9 @@ func _unhandled_input(event: InputEvent) -> void:
 			if str(raycast_wall.get_collider()).containsn("solid"): 
 				Global.string_target = raycast_wall.get_collision_point()
 				Global.is_swinging = true
-			elif raycast_silky.global_position + raycast_silky.target_position == global_mouse_pos and str(raycast_silky.get_collider()).containsn("silky") and $Silky_wall.mouse_entered: 
+			#elif raycast_silky.global_position + raycast_silky.target_position == global_mouse_pos and str(raycast_silky.get_collider()).containsn("silky") and $Silky_wall.mouse_entered: 
+			#	Global.string_target = raycast_silky.target_position + raycast_silky.global_position
+			#	Global.is_swinging = true
+			elif player.cast_entered: 
 				Global.string_target = raycast_silky.target_position + raycast_silky.global_position
 				Global.is_swinging = true

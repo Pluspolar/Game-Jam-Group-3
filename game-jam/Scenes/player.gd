@@ -3,11 +3,12 @@ class_name Player
 
 @export var speed: float = 200
 
+var cast_entered : bool = false
 var already_on_wall : bool = false
 var is_sticking: bool = false
 
-func _ready() -> void:
-	position = Vector2(640, 360)
+#func _ready() -> void:
+#	position = Vector2(640, 360)
 	
 func _physics_process(delta: float) -> void:
 	#var mouse_pos : Vector2 = get_viewport().get_mouse_position()
@@ -104,7 +105,23 @@ func _physics_process(delta: float) -> void:
 	if abs(velocity.x) > get_parent().speed_limit : velocity.x = get_parent().speed_limit * abs(velocity.x)/velocity.x
 	if abs(velocity.y) > get_parent().speed_limit : velocity.y = get_parent().speed_limit * abs(velocity.y)/velocity.y
 
-	if position.x < 0 or position.x > get_viewport().size.x: position.x = get_viewport().size.x/2
+	if position.x < 0:
+		position.x = 0
+		velocity.x = old_vel.x*-0.5
+		
+	if position.x > get_viewport().size.x:
+		position.x = get_viewport().size.x
+		velocity.x = old_vel.x*-0.5
+		
+	#if position.x < 0: 
+	#	position.x = get_viewport().size.x
+	#elif position.x > get_viewport().size.x:
+	#wwwwwwwwww	position.x = 0
 	#print(velocity.x)
 	
-	
+
+func _on_cast_point_area_entered(area: Area2D) -> void:
+	cast_entered = true
+
+func _on_cast_point_area_exited(area: Area2D) -> void:
+	cast_entered = false

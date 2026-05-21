@@ -1,0 +1,67 @@
+[gd_scene format=3 uid="uid://dcj8qiqwygmrp"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_6ou05"]
+size = Vector2(1291.75, 83.25)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_k0mgt"]
+size = Vector2(87.25, 513.25)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_njr5j"]
+size = Vector2(641.5, 75.5)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_pj8yx"]
+size = Vector2(90.375, 371)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_3vr47"]
+size = Vector2(829.875, 65.625)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_rdhbp"]
+size = Vector2(105.60156, 90.65625)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_4xtnr"]
+size = Vector2(122.203125, 135.3125)
+
+[node name="level_test" type="Node2D" unique_id=673225537]
+
+[node name="solid" type="StaticBody2D" parent="." unique_id=220195861]
+collision_layer = 2
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="solid" unique_id=586079073]
+position = Vector2(649.125, 691.625)
+shape = SubResource("RectangleShape2D_6ou05")
+
+[node name="CollisionShape2D2" type="CollisionShape2D" parent="solid" unique_id=1609688925]
+position = Vector2(1241, 112)
+shape = SubResource("RectangleShape2D_k0mgt")
+
+[node name="CollisionShape2D3" type="CollisionShape2D" parent="solid" unique_id=869654413]
+position = Vector2(425, 350)
+shape = SubResource("RectangleShape2D_njr5j")
+
+[node name="CollisionPolygon2D2" type="CollisionPolygon2D" parent="solid" unique_id=1650934883]
+position = Vector2(157, 80)
+polygon = PackedVector2Array(369, 568, 652, 512, 654, 568)
+
+[node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="solid" unique_id=1466563339]
+polygon = PackedVector2Array(277, 212, 567, 315, 180, 309, 82, 106)
+
+[node name="CollisionShape2D4" type="CollisionShape2D" parent="solid" unique_id=121805433]
+position = Vector2(1075, -137)
+shape = SubResource("RectangleShape2D_pj8yx")
+
+[node name="CollisionShape2D5" type="CollisionShape2D" parent="solid" unique_id=1702785800]
+position = Vector2(676, 16.8125)
+shape = SubResource("RectangleShape2D_3vr47")
+
+[node name="silky" type="Area2D" parent="." unique_id=1443317371]
+collision_layer = 4
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="silky" unique_id=1704717252]
+position = Vector2(1018, 478)
+shape = SubResource("RectangleShape2D_rdhbp")
+debug_color = Color(0.55757344, 0.5340342, 0.48370427, 0.41960785)
+
+[node name="CollisionShape2D3" type="CollisionShape2D" parent="silky" unique_id=242851538]
+position = Vector2(849, 158)
+shape = SubResource("RectangleShape2D_4xtnr")
+debug_color = Color(0.55757344, 0.5340342, 0.48370427, 0.41960785)
