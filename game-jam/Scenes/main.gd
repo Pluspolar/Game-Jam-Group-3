@@ -73,7 +73,7 @@ func _process(delta: float) -> void:
 		line.clear_points()
 
 	if player.velocity.y > 1000: cam_wobble = Vector2((player.velocity.y-1000)*0.003 * sin(Global.timer/4), (player.velocity.y-1000)*0.003 * sin(Global.timer/(3.1415)))
-	var cam_interpolation : float = pow(0.1*(1+(pow(abs(player.velocity.y), 1.2)*0.001)), 1 / delta / 60)
+	var cam_interpolation : float = 0.1*(1+(pow(abs(player.velocity.y), 1.2)*0.001)) * 60 * delta
 	var player_velocity_limit : float = player.velocity.y
 	player_velocity_limit /= 1+(player_velocity_limit*0.0003)
 	player_velocity_limit = player_velocity_limit*0.1 + player.position.y + (get_viewport().get_mouse_position().y-(get_viewport().size.y/2))*0.2
