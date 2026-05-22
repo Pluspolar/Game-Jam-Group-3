@@ -5,6 +5,8 @@ class_name Player
 @export var gravity: float = 1000
 @export var fall_multiplier: float = 0.0035
 @export var movement_damage: float = 0.035
+@export var wall_jump_dmg: float = 2
+@export var jump_dmg: float = 8.0
 
 var vel_x : float = 0.0
 var already_on_wall : bool = false
@@ -12,6 +14,7 @@ var is_sticking: bool = false
 var cast_entered: bool = false
 var hitbox_half_width: float = 24.0/2.0
 var hurt_timer: float = 0
+var hurtjump_timer: float = 0
 var thread: Thread
 @onready var sprite_anim := $Reversable/animation
 
@@ -43,17 +46,18 @@ func _physics_process(delta: float) -> void:
 			vel_x = ((int(Input.is_action_pressed("left"))*-1) + (int(Input.is_action_pressed("right")))) * delta * speed
 			if abs(vel_x) > 0: 
 				sprite_anim.call_deferred("set_modulate", Color(0.8, 0, 0, 1))
-			else: sprite_anim.call_deferred("set_modulate", Color(1, 1, 1, 1))
+			elif hurtjump_timer <= 0: sprite_anim.call_deferred("set_modulate", Color(1, 1, 1, 1))
 			
 			Global.health -= abs(vel_x) * movement_damage
 			
 		else: 
 			vel_x = 0.2 * ((int(Input.is_action_pressed("left"))*-1) + (int(Input.is_action_pressed("right")))) * delta * speed
-			sprite_anim.call_deferred("set_modulate", Color(1, 1, 1, 1))
+			if hurtjump_timer <= 0: sprite_anim.call_deferred("set_modulate", Color(1, 1, 1, 1))
 			
 		velocity.x += vel_x
 		
 	if not Global.is_swinging and is_on_floor() and Input.is_action_just_pressed("jump"):
+		_hurt_jump(jump_dmg)
 		velocity.y = -300
 	
 	if not Global.is_swinging and is_on_ceiling() and Input.is_action_just_pressed("jump"):
@@ -62,6 +66,7 @@ func _physics_process(delta: float) -> void:
 			
 	if not Global.is_swinging and is_on_wall() and Input.is_action_just_pressed("jump"):
 		velocity.y = -300
+		_hurt_jump(wall_jump_dmg)
 		
 		if get_wall_normal().x < 0:
 			velocity.x -= 200
@@ -139,8 +144,12 @@ func _physics_process(delta: float) -> void:
 	else:
 		sprite_anim.play("walk")
 	
+	if hurtjump_timer > 0:
+		hurtjump_timer -= 1 * delta
+	
 	if Global.health <= 0:
 		hurt_timer = 1
+		is_sticking = false
 		sprite_anim.call_deferred("set_modulate", Color(0.5, 0, 0, 1))
 		sprite_anim.play("fall")
 
@@ -149,10 +158,22 @@ func _hurt(damage : float) -> void:
 	hurt_timer = 0.3
 	Global.is_swinging = false
 	Global.health -= pow(damage, 2)
+	thread.start(_hurt_white)
+	
+func _hurt_jump(damage : float) -> void:
+	thread = Thread.new()
+	hurtjump_timer = damage * 0.04375
+	Global.is_swinging = false
+	Global.health -= damage
+	thread.start(_hurt_white)
 	
 func _hurt_white():
-	sprite_anim.call_deferred("set_modulate", Color(2, 0, 0, 1))
-	await get_tree().create_timer(hurt_timer).timeout
+	if hurt_timer <= 0: 
+		sprite_anim.call_deferred("set_modulate", Color(1.5-(hurtjump_timer*1.5), 0, 0, 1))
+		await get_tree().create_timer(hurtjump_timer).timeout
+	else: 
+		sprite_anim.call_deferred("set_modulate", Color(2, 0, 0, 1))
+		await get_tree().create_timer(hurt_timer).timeout
 	if Global.health > 0: sprite_anim.call_deferred("set_modulate", Color(1, 1, 1, 1))
 
 	

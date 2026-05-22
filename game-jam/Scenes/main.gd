@@ -44,8 +44,9 @@ func _physics_process(delta: float) -> void:
 	else: color_rect.material.set_shader_parameter("red_multiplier", 1.0)
 	
 	if Global.health <= 0:
-		await get_tree().create_timer(1.5).timeout
+		await get_tree().create_timer(2).timeout
 		Global.health = 100
+		Global.is_swinging = false
 		get_tree().reload_current_scene()
 	
 func create_line(player_pos: Vector2):
@@ -114,3 +115,6 @@ func _checkinput() -> void:
 			elif player.cast_entered: 
 				Global.string_target = raycast_silky.get_collision_point()
 				Global.is_swinging = true
+				
+	if Input.is_action_just_pressed("heal"):
+		if Global.health > 0: Global.health += 5

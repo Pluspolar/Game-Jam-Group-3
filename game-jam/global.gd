@@ -7,6 +7,9 @@ var health: float = 100
 
 func _process(delta: float) -> void:
 	timer += 100 * delta
+	
+	if Global.health > 100:
+		Global.health = 100
 
 func _unhandled_input(event: InputEvent) -> void:
 	if event.is_action_pressed("jump") and is_swinging:
