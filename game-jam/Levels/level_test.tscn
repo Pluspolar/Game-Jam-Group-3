@@ -1,5 +1,8 @@
 [gd_scene format=3 uid="uid://dcj8qiqwygmrp"]
 
+[ext_resource type="PackedScene" uid="uid://dcbf7yh5thgpm" path="res://Scenes/background_1.tscn" id="1_3vr47"]
+[ext_resource type="PackedScene" uid="uid://cwk7skvqf86x1" path="res://Scenes/background_2.tscn" id="2_7mba1"]
+
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_q8e8m"]
 size = Vector2(137.9336, 377)
 
@@ -45,8 +48,14 @@ size = Vector2(57.90039, 45.328125)
 [node name="level_test" type="Node2D" unique_id=673225537]
 metadata/_edit_vertical_guides_ = [1280.0]
 
+[node name="Background_1" parent="." unique_id=730671538 instance=ExtResource("1_3vr47")]
+
+[node name="Background_2" parent="." unique_id=690412022 instance=ExtResource("2_7mba1")]
+visible = false
+
 [node name="solid" type="StaticBody2D" parent="." unique_id=220195861]
 collision_layer = 2
+metadata/_edit_lock_ = true
 
 [node name="CollisionShape2D7" type="CollisionShape2D" parent="solid" unique_id=1330338651]
 position = Vector2(51, -762.5)
@@ -97,6 +106,7 @@ shape = SubResource("RectangleShape2D_oenlu")
 
 [node name="silky" type="Area2D" parent="." unique_id=1443317371]
 collision_layer = 4
+metadata/_edit_lock_ = true
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="silky" unique_id=1704717252]
 position = Vector2(1018, 478)

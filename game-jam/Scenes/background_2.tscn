@@ -1,0 +1,17 @@
+[gd_scene format=3 uid="uid://cwk7skvqf86x1"]
+
+[ext_resource type="Texture2D" uid="uid://c3a1qxg3h6l0" path="res://Sprites/background/0-backg.png" id="1_rg3ee"]
+
+[node name="Background_2" type="Node2D" unique_id=690412022]
+
+[node name="background" type="Parallax2D" parent="." unique_id=338211269]
+modulate = Color(0.79624295, 0.796243, 0.7962429, 1)
+scroll_scale = Vector2(0.1, 0.1)
+repeat_size = Vector2(0, 2532)
+repeat_times = 2
+
+[node name="Sprite2D" type="Sprite2D" parent="background" unique_id=1993448379]
+texture_filter = 1
+position = Vector2(624, -192)
+scale = Vector2(1.2, 1.2)
+texture = ExtResource("1_rg3ee")

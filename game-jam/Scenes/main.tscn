@@ -10,11 +10,13 @@ stretchiness = 200.0
 string_power = 1.75
 player_range = 360.0
 
+[node name="level_test" parent="." unique_id=673225537 instance=ExtResource("4_jjvhh")]
+metadata/_edit_lock_ = true
+
 [node name="Cam" type="Camera2D" parent="." unique_id=1260990897]
 position = Vector2(640, 360)
 
+[node name="line" type="Node2D" parent="." unique_id=1119453770]
+
 [node name="Player" parent="." unique_id=38737271 instance=ExtResource("1_jjgbg")]
 position = Vector2(669, 580)
-
-[node name="level_test" parent="." unique_id=673225537 instance=ExtResource("4_jjvhh")]
-metadata/_edit_lock_ = true

@@ -22,20 +22,20 @@ var distance : float
 var cam_wobble : Vector2 = Vector2(0,0)
 
 func _ready() -> void:
-	
 	line = Line2D.new()
-	add_child(line)
+	$line.add_child(line)
 	
 	line.width = 4.5
 	line.default_color = Color(1, 1, 1, 0.5)
 	line.antialiased = true
 	
-func _process(delta: float) -> void:
+func _physics_process(delta: float) -> void:
 	global_mouse_pos = get_global_mouse_position()
 	
 	_swing_velocity(delta)
 	_cam(delta)
 	_raycast()
+	_checkinput()
 	
 func create_line(player_pos: Vector2):
 	distance = player_pos.distance_to(Global.string_target)
@@ -93,10 +93,10 @@ func _raycast() -> void:
 	raycast_silky.target_position = player.global_position - raycast_silky.global_position
 	raycast_point.position = raycast_wall.target_position
 	
-func _unhandled_input(event: InputEvent) -> void:
-	if event.is_action_pressed("shoot"):
+func _checkinput() -> void:
+	if Input.is_action_just_pressed("shoot") and player.hurt_timer <= 0:
 		if raycast_wall.is_colliding() or raycast_silky.is_colliding():
-			if str(raycast_wall.get_collider()).containsn("solid"): 
+			if str(raycast_wall.get_collider()).contains("solid"): 
 				Global.string_target = raycast_wall.get_collision_point()
 				Global.is_swinging = true
 				
