@@ -2,7 +2,13 @@
 
 [ext_resource type="Script" uid="uid://c4ox0svdgy856" path="res://Scenes/main.gd" id="1_bo1nx"]
 [ext_resource type="PackedScene" uid="uid://cp63kc2ym1jcn" path="res://Scenes/player.tscn" id="1_jjgbg"]
+[ext_resource type="Shader" uid="uid://bojkb5ylllhp7" path="res://Scenes/main.gdshader" id="1_jjvhh"]
 [ext_resource type="PackedScene" uid="uid://dcj8qiqwygmrp" path="res://Levels/level_test.tscn" id="4_jjvhh"]
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_jjvhh"]
+shader = ExtResource("1_jjvhh")
+shader_parameter/alpha = 0.0
+shader_parameter/red_multiplier = 0.0
 
 [node name="main" type="Node2D" unique_id=1425132053]
 script = ExtResource("1_bo1nx")
@@ -15,6 +21,17 @@ metadata/_edit_lock_ = true
 
 [node name="Cam" type="Camera2D" parent="." unique_id=1260990897]
 position = Vector2(640, 360)
+
+[node name="CanvasLayer" type="CanvasLayer" parent="Cam" unique_id=201327624]
+
+[node name="ColorRect" type="ColorRect" parent="Cam/CanvasLayer" unique_id=913092248]
+material = SubResource("ShaderMaterial_jjvhh")
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+size_flags_horizontal = 4
 
 [node name="line" type="Node2D" parent="." unique_id=1119453770]
 

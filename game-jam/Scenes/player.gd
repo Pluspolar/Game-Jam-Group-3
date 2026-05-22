@@ -3,7 +3,10 @@ class_name Player
 
 @export var speed: float = 200
 @export var gravity: float = 1000
+@export var fall_multiplier: float = 0.0035
+@export var movement_damage: float = 0.035
 
+var vel_x : float = 0.0
 var already_on_wall : bool = false
 var is_sticking: bool = false
 var cast_entered: bool = false
@@ -34,10 +37,21 @@ func _physics_process(delta: float) -> void:
 		velocity.y *= pow(0.4, 60 * delta)
 	
 	if hurt_timer <= 0:
+		vel_x = 0
 		if is_on_floor() or is_on_ceiling(): #or (is_on_wall() and abs(get_wall_normal().x) <= 0.8):
 			velocity.x *= pow(0.945, 60 * delta)
-			velocity.x += ((int(Input.is_action_pressed("left"))*-1) + (int(Input.is_action_pressed("right")))) * delta * speed
-		else: velocity.x += 0.2 * ((int(Input.is_action_pressed("left"))*-1) + (int(Input.is_action_pressed("right")))) * delta * speed
+			vel_x = ((int(Input.is_action_pressed("left"))*-1) + (int(Input.is_action_pressed("right")))) * delta * speed
+			if abs(vel_x) > 0: 
+				sprite_anim.call_deferred("set_modulate", Color(0.8, 0, 0, 1))
+			else: sprite_anim.call_deferred("set_modulate", Color(1, 1, 1, 1))
+			
+			Global.health -= abs(vel_x) * movement_damage
+			
+		else: 
+			vel_x = 0.2 * ((int(Input.is_action_pressed("left"))*-1) + (int(Input.is_action_pressed("right")))) * delta * speed
+			sprite_anim.call_deferred("set_modulate", Color(1, 1, 1, 1))
+			
+		velocity.x += vel_x
 		
 	if not Global.is_swinging and is_on_floor() and Input.is_action_just_pressed("jump"):
 		velocity.y = -300
@@ -67,11 +81,10 @@ func _physics_process(delta: float) -> void:
 		
 	move_and_slide()
 		
-		
 	if is_on_wall() and abs(old_vel.x) + abs(old_vel.y)*0.5 > 1250 and not already_on_wall:
 		velocity.x = old_vel.x*-0.1
 		already_on_wall = true
-		_hurt()
+		_hurt(abs(old_vel.x)*fall_multiplier)
 		if get_wall_normal().x < 0:
 			$Reversable/particles/right.restart()
 		else:
@@ -81,7 +94,7 @@ func _physics_process(delta: float) -> void:
 	
 	if is_on_ceiling():
 		if abs(old_vel.x)*0.5 + abs(old_vel.y) >= 1000:
-			_hurt()
+			_hurt(abs(old_vel.y)*fall_multiplier)
 			$Reversable/particles/up.restart()
 			velocity.y = old_vel.y*-0.1
 			is_sticking = false
@@ -95,7 +108,7 @@ func _physics_process(delta: float) -> void:
 			
 	if is_on_floor() or (is_on_wall() and abs(get_wall_normal().x) < 0.8):
 		if abs(old_vel.x)*0.5 + abs(old_vel.y) >= 1000:
-			_hurt()
+			_hurt(abs(old_vel.y)*fall_multiplier)
 			velocity.y = old_vel.y*-0.2
 			is_sticking = false
 			$Reversable/particles/down.restart()
@@ -126,18 +139,20 @@ func _physics_process(delta: float) -> void:
 	else:
 		sprite_anim.play("walk")
 	
-func _hurt() -> void:
+	if Global.health <= 0:
+		hurt_timer = 1
+		sprite_anim.call_deferred("set_modulate", Color(0.5, 0, 0, 1))
+		sprite_anim.play("fall")
+
+func _hurt(damage : float) -> void:
 	thread = Thread.new()
 	hurt_timer = 0.3
 	Global.is_swinging = false
-	thread.start(_hurt_white)
+	Global.health -= pow(damage, 2)
 	
 func _hurt_white():
 	sprite_anim.call_deferred("set_modulate", Color(2, 0, 0, 1))
 	await get_tree().create_timer(hurt_timer).timeout
-	sprite_anim.call_deferred("set_modulate", Color(1, 1, 1, 1))
-	
-func _exit_tree() -> void:
-	thread.wait_to_finish()
+	if Global.health > 0: sprite_anim.call_deferred("set_modulate", Color(1, 1, 1, 1))
 
 	

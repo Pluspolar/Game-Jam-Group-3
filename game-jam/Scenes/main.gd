@@ -6,6 +6,7 @@ var line: Line2D
 @onready var raycast_wall := $Player/RayCast_wall
 @onready var raycast_point := $Player/cast_point/point
 @onready var raycast_silky := $Player/RayCast_silky
+@onready var color_rect := $Cam/CanvasLayer/ColorRect
 @export var string_amount : float = 40 #Use Even Number
 @export var stretchiness : float = 400
 @export var x_stretch : float = 0.75  #it's better to be between 0-1, it streches more based on the x axis
@@ -36,6 +37,16 @@ func _physics_process(delta: float) -> void:
 	_cam(delta)
 	_raycast()
 	_checkinput()
+	
+	color_rect.material.set_shader_parameter("alpha", 1-Global.health/100)
+	if Global.health > 0: 
+		color_rect.material.set_shader_parameter("red_multiplier", pow(100-Global.health, 0.75)*0.06)
+	else: color_rect.material.set_shader_parameter("red_multiplier", 1.0)
+	
+	if Global.health <= 0:
+		await get_tree().create_timer(1.5).timeout
+		Global.health = 100
+		get_tree().reload_current_scene()
 	
 func create_line(player_pos: Vector2):
 	distance = player_pos.distance_to(Global.string_target)
