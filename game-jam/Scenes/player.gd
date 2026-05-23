@@ -142,7 +142,9 @@ func _physics_process(delta: float) -> void:
 		else:
 			sprite_anim.play("jump")
 	else:
-		sprite_anim.play("walk")
+		if abs(vel_x) > 0:
+			sprite_anim.play("walk")
+		else: sprite_anim.play("idle")
 	
 	if hurtjump_timer > 0:
 		hurtjump_timer -= 1 * delta

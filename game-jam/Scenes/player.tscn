@@ -7,13 +7,13 @@
 [ext_resource type="Texture2D" uid="uid://rpirthst545v" path="res://Sprites/player/spider_hurt_1.png" id="3_vgqql"]
 [ext_resource type="Texture2D" uid="uid://c0onyxasppn7i" path="res://Sprites/player/spider_jump.png" id="4_3smsa"]
 
-[sub_resource type="AtlasTexture" id="AtlasTexture_6t5aa"]
-atlas = ExtResource("2_cvnsp")
-region = Rect2(0, 0, 128, 128)
-
 [sub_resource type="AtlasTexture" id="AtlasTexture_vgqql"]
 atlas = ExtResource("3_6t5aa")
 region = Rect2(0, 0, 360, 360)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_6t5aa"]
+atlas = ExtResource("2_cvnsp")
+region = Rect2(0, 0, 128, 128)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_fkybt"]
 atlas = ExtResource("3_6t5aa")
@@ -40,6 +40,14 @@ animations = [{
 "loop": false,
 "name": &"hurt",
 "speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_vgqql")
+}],
+"loop": true,
+"name": &"idle",
+"speed": 10.0
 }, {
 "frames": [{
 "duration": 1.0,
@@ -95,8 +103,8 @@ texture_filter = 1
 position = Vector2(-3, -12)
 scale = Vector2(0.13530554, 0.13530554)
 sprite_frames = SubResource("SpriteFrames_vgqql")
-animation = &"fall"
-autoplay = "walk"
+animation = &"idle"
+autoplay = "idle"
 
 [node name="particles" type="Node2D" parent="Reversable" unique_id=272623293]
 position = Vector2(-8, 0)
