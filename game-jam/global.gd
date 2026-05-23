@@ -3,13 +3,9 @@ extends Node
 var string_target: Vector2
 var is_swinging: bool = false
 var timer: float = 0
-var health: float = 100
 
 func _process(delta: float) -> void:
 	timer += 100 * delta
-	
-	if Global.health > 100:
-		Global.health = 100
 
 func _unhandled_input(event: InputEvent) -> void:
 	if event.is_action_pressed("jump") and is_swinging:

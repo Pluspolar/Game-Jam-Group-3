@@ -2,101 +2,38 @@
 
 [ext_resource type="Script" uid="uid://cxlii41v7ciq2" path="res://Scenes/player.gd" id="1_v0iea"]
 [ext_resource type="Texture2D" uid="uid://cv4v1d5frtray" path="res://icon.svg" id="2_cvnsp"]
-[ext_resource type="Texture2D" uid="uid://d21vx75jjrpbh" path="res://Sprites/player/spider_fall_2.png" id="2_x3wgy"]
-[ext_resource type="Texture2D" uid="uid://j3fuojtlqe03" path="res://Sprites/player/player_spider_sheet.png" id="3_6t5aa"]
-[ext_resource type="Texture2D" uid="uid://rpirthst545v" path="res://Sprites/player/spider_hurt_1.png" id="3_vgqql"]
-[ext_resource type="Texture2D" uid="uid://c0onyxasppn7i" path="res://Sprites/player/spider_jump.png" id="4_3smsa"]
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_6t5aa"]
 atlas = ExtResource("2_cvnsp")
 region = Rect2(0, 0, 128, 128)
 
-[sub_resource type="AtlasTexture" id="AtlasTexture_vgqql"]
-atlas = ExtResource("3_6t5aa")
-region = Rect2(0, 0, 360, 360)
-
-[sub_resource type="AtlasTexture" id="AtlasTexture_fkybt"]
-atlas = ExtResource("3_6t5aa")
-region = Rect2(360, 0, 360, 360)
-
-[sub_resource type="AtlasTexture" id="AtlasTexture_x3wgy"]
-atlas = ExtResource("3_6t5aa")
-region = Rect2(720, 0, 360, 360)
-
 [sub_resource type="SpriteFrames" id="SpriteFrames_vgqql"]
 animations = [{
-"frames": [{
-"duration": 1.0,
-"texture": ExtResource("2_x3wgy")
-}],
-"loop": true,
-"name": &"fall",
-"speed": 5.0
-}, {
-"frames": [{
-"duration": 1.0,
-"texture": ExtResource("3_vgqql")
-}],
-"loop": false,
-"name": &"hurt",
-"speed": 5.0
-}, {
-"frames": [{
-"duration": 1.0,
-"texture": ExtResource("4_3smsa")
-}],
-"loop": true,
-"name": &"jump",
-"speed": 5.0
-}, {
 "frames": [{
 "duration": 1.0,
 "texture": SubResource("AtlasTexture_6t5aa")
 }],
 "loop": true,
-"name": &"proto",
+"name": &"default",
 "speed": 5.0
-}, {
-"frames": [{
-"duration": 1.0,
-"texture": SubResource("AtlasTexture_vgqql")
-}, {
-"duration": 1.0,
-"texture": SubResource("AtlasTexture_fkybt")
-}, {
-"duration": 1.0,
-"texture": SubResource("AtlasTexture_x3wgy")
-}],
-"loop": true,
-"name": &"walk",
-"speed": 10.0
 }]
 
-[sub_resource type="Gradient" id="Gradient_x3wgy"]
-offsets = PackedFloat32Array(0, 0.03448276)
-colors = PackedColorArray(0.13319641, 0.13319641, 0.13319638, 1, 1, 1, 1, 1)
-
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_cvnsp"]
-size = Vector2(24, 24)
+size = Vector2(16, 16)
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_cvnsp"]
-radius = 1.0
+radius = 1.4142135
 
 [node name="Player" type="CharacterBody2D" unique_id=38737271]
 collision_mask = 3
 script = ExtResource("1_v0iea")
 speed = 500.0
-fall_multiplier = 0.005
 
 [node name="Reversable" type="Node2D" parent="." unique_id=62569021]
 
-[node name="animation" type="AnimatedSprite2D" parent="Reversable" unique_id=193856732]
-texture_filter = 1
-position = Vector2(-3, -12)
-scale = Vector2(0.13530554, 0.13530554)
+[node name="AnimatedSprite" type="AnimatedSprite2D" parent="Reversable" unique_id=193856732]
+scale = Vector2(0.125, 0.12499999)
 sprite_frames = SubResource("SpriteFrames_vgqql")
-animation = &"fall"
-autoplay = "walk"
 
 [node name="particles" type="Node2D" parent="Reversable" unique_id=272623293]
 position = Vector2(-8, 0)
@@ -111,10 +48,7 @@ spread = 80.0
 gravity = Vector2(0, 600)
 initial_velocity_min = 100.0
 initial_velocity_max = 350.0
-scale_amount_min = 1.5
-scale_amount_max = 4.0
-color = Color(0.68828154, 0.35457176, 0.14236102, 1)
-color_ramp = SubResource("Gradient_x3wgy")
+scale_amount_max = 2.5
 
 [node name="right" type="CPUParticles2D" parent="Reversable/particles" unique_id=271214284]
 position = Vector2(16, 0)
@@ -128,10 +62,7 @@ spread = 80.0
 gravity = Vector2(0, 600)
 initial_velocity_min = 100.0
 initial_velocity_max = 350.0
-scale_amount_min = 1.5
-scale_amount_max = 4.0
-color = Color(0.68828154, 0.35457176, 0.14236102, 1)
-color_ramp = SubResource("Gradient_x3wgy")
+scale_amount_max = 2.5
 
 [node name="down" type="CPUParticles2D" parent="Reversable/particles" unique_id=788850856]
 position = Vector2(8, 8)
@@ -145,10 +76,7 @@ spread = 80.0
 gravity = Vector2(0, 600)
 initial_velocity_min = 300.0
 initial_velocity_max = 600.0
-scale_amount_min = 1.5
-scale_amount_max = 4.0
-color = Color(0.68828154, 0.35457176, 0.14236102, 1)
-color_ramp = SubResource("Gradient_x3wgy")
+scale_amount_max = 2.5
 
 [node name="up" type="CPUParticles2D" parent="Reversable/particles" unique_id=622602415]
 position = Vector2(8, -8)
@@ -162,13 +90,9 @@ spread = 80.0
 gravity = Vector2(0, 600)
 initial_velocity_min = 100.0
 initial_velocity_max = 350.0
-scale_amount_min = 1.5
-scale_amount_max = 4.0
-color = Color(0.68828154, 0.35457176, 0.14236102, 1)
-color_ramp = SubResource("Gradient_x3wgy")
+scale_amount_max = 2.5
 
 [node name="Hitbox" type="CollisionShape2D" parent="." unique_id=102091354]
-visible = false
 shape = SubResource("RectangleShape2D_cvnsp")
 
 [node name="RayCast_wall" type="RayCast2D" parent="." unique_id=1728628983]
@@ -184,10 +108,12 @@ collide_with_areas = true
 collide_with_bodies = false
 
 [node name="cast_point" type="Area2D" parent="." unique_id=361814074]
-z_index = 1
 collision_layer = 0
 collision_mask = 4
 
 [node name="point" type="CollisionShape2D" parent="cast_point" unique_id=945846381]
 shape = SubResource("CircleShape2D_cvnsp")
 debug_color = Color(0.86307764, 0.35944661, 0, 0.41960785)
+
+[connection signal="area_entered" from="cast_point" to="." method="_on_cast_point_area_entered"]
+[connection signal="area_exited" from="cast_point" to="." method="_on_cast_point_area_exited"]
