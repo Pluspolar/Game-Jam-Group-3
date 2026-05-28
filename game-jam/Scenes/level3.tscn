@@ -157,6 +157,17 @@ polygon = PackedVector2Array(933, 333, 1060, 297, 1003, 344, 1055, 349, 1005, 37
 [node name="CollisionPolygon2D2" type="CollisionPolygon2D" parent="walls/Solid" unique_id=825780096]
 polygon = PackedVector2Array(330, 487, 248, 514, 262, 571, 294, 584, 385, 617, 383, 535)
 
+[node name="CollisionPolygon2D3" type="CollisionPolygon2D" parent="walls/Solid" unique_id=340111608]
+position = Vector2(57, -5)
+polygon = PackedVector2Array(210, -557, 314, -713, 413, -559)
+
+[node name="CollisionPolygon2D4" type="CollisionPolygon2D" parent="walls/Solid" unique_id=55366680]
+position = Vector2(57, -5)
+polygon = PackedVector2Array(850, -566, 954, -722, 1053, -568)
+
+[node name="CollisionPolygon2D5" type="CollisionPolygon2D" parent="walls/Solid" unique_id=1539620361]
+polygon = PackedVector2Array(521, -690, 860, -688, 680, -955)
+
 [node name="Silky_wall" type="Node2D" parent="." unique_id=584780664]
 script = ExtResource("1_6o2xc")
 
