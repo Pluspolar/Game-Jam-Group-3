@@ -61,8 +61,8 @@ texture = ExtResource("5_kry3j")
 
 [node name="Sprite2D" type="Sprite2D" parent="lava" unique_id=275640896]
 texture_filter = 1
-position = Vector2(640.00006, 1359.0001)
-scale = Vector2(20.515625, 20.515625)
+position = Vector2(644, 2295)
+scale = Vector2(-20.516, -20.516)
 texture = ExtResource("5_kry3j")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="lava" unique_id=730358862]

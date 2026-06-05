@@ -168,7 +168,7 @@ func _checkinput() -> void:
 				line_heal.clear_points()
 		else: 
 			Global._shake(5)
-			Global.health -= 10
+			Global.health -= 20
 				
 	if Input.is_action_just_pressed("heal") and Global.health > 0:
 		line_heal.clear_points()
@@ -188,7 +188,7 @@ func heal_coords():
 		else: coords_heal.append(Vector2(randf_range(150,100), start_ycoords + (float(i)/float(coords_random) * randf_range(360, 380))))
 
 func _loadlevel(index: int):
-	level_scene = load("res://Levels/level_test.tscn")
+	level_scene = load("res://Levels/level" + str(Global.cur_level) + ".tscn")
 	var label_inst = level_scene.instantiate()
 	$level.add_child(label_inst)
 

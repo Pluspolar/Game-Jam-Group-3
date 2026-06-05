@@ -31,7 +31,8 @@ func _loadlevel(index: int):
 	
 func _nextlevel():
 	if cur_level == unlocked_level: unlocked_level += 1
-	cur_level += 1
+	if cur_level >= 4: cur_level = 1
+	else: cur_level += 1
 	_reset()
 
 func _reset():

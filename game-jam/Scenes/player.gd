@@ -49,6 +49,7 @@ func _physics_process(delta: float) -> void:
 			elif hurtjump_timer <= 0: sprite_anim.call_deferred("set_modulate", Color(1, 1, 1, 1))
 			
 			Global.health -= abs(vel_x) * movement_damage
+			if randi_range(1,5) == 1: Global._shake(1)
 			
 		else: 
 			vel_x = 0.2 * ((int(Input.is_action_pressed("left"))*-1) + (int(Input.is_action_pressed("right")))) * delta * speed
