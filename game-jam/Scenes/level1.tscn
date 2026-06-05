@@ -10,8 +10,3 @@ size = Vector2(1283, 73.5)
 [node name="CollisionShape2D" type="CollisionShape2D" parent="StaticBody2D" unique_id=644218089]
 position = Vector2(639.5, 685)
 shape = SubResource("RectangleShape2D_6015k")
-
-[node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="StaticBody2D" unique_id=663773113]
-position = Vector2(-1141, 631)
-scale = Vector2(4.8214283, 0.6153928)
-polygon = PackedVector2Array(372.74277, -12.184692, 309.74277, 27.815308, 372.71112, 58.499268, 435.74277, 27.815308, 407.0875, 9.62146)
