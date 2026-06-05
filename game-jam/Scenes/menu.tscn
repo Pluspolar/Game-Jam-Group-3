@@ -1,9 +1,9 @@
 [gd_scene format=3 uid="uid://exegsfccfjbt"]
 
+[ext_resource type="Script" uid="uid://dso11k6berfbt" path="res://Scenes/button.gd" id="2_158mb"]
 [ext_resource type="FontFile" uid="uid://cyge4tlc7d2iw" path="res://Sprites/pixel font/dogicapixelbold.ttf" id="2_cayip"]
-[ext_resource type="Script" uid="uid://b8k4vrntewvfh" path="res://Scenes/start_button.gd" id="2_xhh6f"]
-[ext_resource type="Script" uid="uid://ts3bspt2fsjp" path="res://Scenes/quit_button.gd" id="3_cayip"]
 [ext_resource type="Script" uid="uid://dwd44u2u3o3fg" path="res://Scenes/game_title.gd" id="4_158mb"]
+[ext_resource type="Texture2D" uid="uid://dl1ql0s1u6whs" path="res://Sprites/background/1-back.png" id="4_wwsa2"]
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_1rerr"]
 bg_color = Color(0.4149491, 0.4149491, 0.4149491, 1)
@@ -54,9 +54,9 @@ shadow_offset = Vector2(5, 5)
 
 [node name="Start_button" type="Button" parent="CanvasLayer" unique_id=240006197]
 anchors_preset = -1
-anchor_left = 0.39140624
+anchor_left = 0.3734375
 anchor_top = 0.43611112
-anchor_right = 0.60859376
+anchor_right = 0.6265625
 anchor_bottom = 0.5638889
 offset_left = -58.0
 offset_top = -43.0
@@ -73,9 +73,10 @@ theme_override_font_sizes/font_size = 67
 theme_override_styles/normal = SubResource("StyleBoxFlat_1rerr")
 theme_override_styles/pressed = SubResource("StyleBoxFlat_cayip")
 theme_override_styles/hover = SubResource("StyleBoxFlat_xhh6f")
-text = "START"
+text = "LEVELS"
 icon_alignment = 1
-script = ExtResource("2_xhh6f")
+script = ExtResource("2_158mb")
+scene_id = "level_menu"
 metadata/_edit_use_anchors_ = true
 
 [node name="Quit_Button" type="Button" parent="CanvasLayer" unique_id=1241282313]
@@ -101,7 +102,8 @@ theme_override_styles/pressed = SubResource("StyleBoxFlat_cayip")
 theme_override_styles/hover = SubResource("StyleBoxFlat_xhh6f")
 text = "QUIT"
 icon_alignment = 1
-script = ExtResource("3_cayip")
+script = ExtResource("2_158mb")
+scene_id = "quit"
 
 [node name="Game_Title" type="Label" parent="CanvasLayer" unique_id=1344259479]
 anchors_preset = 5
@@ -119,9 +121,50 @@ horizontal_alignment = 1
 vertical_alignment = 1
 script = ExtResource("4_158mb")
 
+[node name="Start_button2" type="Button" parent="CanvasLayer" unique_id=593371472]
+anchors_preset = -1
+anchor_left = 0.39140624
+anchor_top = 0.43611112
+anchor_right = 0.60859376
+anchor_bottom = 0.5638889
+offset_left = -1529.0
+offset_top = -301.0
+offset_right = -1413.0
+offset_bottom = -265.0
+grow_horizontal = 2
+grow_vertical = 2
+pivot_offset = Vector2(196, 66)
+theme_override_colors/font_pressed_color = Color(0.2, 0.2, 0.2, 1)
+theme_override_colors/font_outline_color = Color(0.52906674, 0.52906674, 0.52906656, 1)
+theme_override_constants/outline_size = 20
+theme_override_fonts/font = ExtResource("2_cayip")
+theme_override_font_sizes/font_size = 67
+theme_override_styles/normal = SubResource("StyleBoxFlat_1rerr")
+theme_override_styles/pressed = SubResource("StyleBoxFlat_cayip")
+theme_override_styles/hover = SubResource("StyleBoxFlat_xhh6f")
+text = "START"
+icon_alignment = 1
+script = ExtResource("2_158mb")
+metadata/_edit_use_anchors_ = true
+
+[node name="background" type="Parallax2D" parent="." unique_id=921263637]
+modulate = Color(0.79624295, 0.796243, 0.7962429, 1)
+repeat_size = Vector2(0, 2532)
+autoscroll = Vector2(0, 100)
+repeat_times = 2
+
+[node name="Sprite2D" type="Sprite2D" parent="background" unique_id=574938436]
+texture_filter = 1
+position = Vector2(648.99994, 909.99994)
+scale = Vector2(4.379487, 3.4905214)
+texture = ExtResource("4_wwsa2")
+
 [connection signal="button_down" from="CanvasLayer/Start_button" to="CanvasLayer/Start_button" method="_on_button_down"]
 [connection signal="mouse_entered" from="CanvasLayer/Start_button" to="CanvasLayer/Start_button" method="_on_mouse_entered"]
 [connection signal="mouse_exited" from="CanvasLayer/Start_button" to="CanvasLayer/Start_button" method="_on_mouse_exited"]
 [connection signal="button_down" from="CanvasLayer/Quit_Button" to="CanvasLayer/Quit_Button" method="_on_button_down"]
 [connection signal="mouse_entered" from="CanvasLayer/Quit_Button" to="CanvasLayer/Quit_Button" method="_on_mouse_entered"]
 [connection signal="mouse_exited" from="CanvasLayer/Quit_Button" to="CanvasLayer/Quit_Button" method="_on_mouse_exited"]
+[connection signal="button_down" from="CanvasLayer/Start_button2" to="CanvasLayer/Start_button2" method="_on_button_down"]
+[connection signal="mouse_entered" from="CanvasLayer/Start_button2" to="CanvasLayer/Start_button2" method="_on_mouse_entered"]
+[connection signal="mouse_exited" from="CanvasLayer/Start_button2" to="CanvasLayer/Start_button2" method="_on_mouse_exited"]

@@ -2,6 +2,7 @@
 
 [ext_resource type="PackedScene" uid="uid://dcbf7yh5thgpm" path="res://Scenes/background_1.tscn" id="1_3vr47"]
 [ext_resource type="PackedScene" uid="uid://cwk7skvqf86x1" path="res://Scenes/background_2.tscn" id="2_7mba1"]
+[ext_resource type="PackedScene" uid="uid://cievq2jhecrnb" path="res://Scenes/end_trigger.tscn" id="3_soq8b"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_q8e8m"]
 size = Vector2(137.9336, 377)
@@ -137,3 +138,6 @@ debug_color = Color(0.55757344, 0.5340342, 0.48370427, 0.41960785)
 position = Vector2(366, -3413)
 shape = SubResource("RectangleShape2D_ku5x2")
 debug_color = Color(0.55757344, 0.5340342, 0.48370427, 0.41960785)
+
+[node name="end_trigger" parent="." unique_id=1149071925 instance=ExtResource("3_soq8b")]
+position = Vector2(598, -3656)

@@ -25,6 +25,10 @@ window/size/viewport_width=1280
 window/size/viewport_height=720
 window/stretch/mode="canvas_items"
 
+[global_group]
+
+load_level=""
+
 [input]
 
 shoot={
@@ -80,6 +84,8 @@ heal={
 3d_render/layer_3="Silky Wall"
 2d_physics/layer_1="All"
 2d_physics/layer_3="Silky Wall"
+2d_physics/layer_4="End"
+2d_physics/layer_5="Player_end"
 
 [physics]
 

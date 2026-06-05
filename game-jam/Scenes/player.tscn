@@ -91,7 +91,7 @@ size = Vector2(24, 24)
 radius = 1.0
 
 [node name="Player" type="CharacterBody2D" unique_id=38737271]
-collision_mask = 3
+collision_mask = 19
 script = ExtResource("1_v0iea")
 speed = 500.0
 fall_multiplier = 0.005

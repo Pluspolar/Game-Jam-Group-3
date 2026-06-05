@@ -10,13 +10,16 @@ shader = ExtResource("1_jjvhh")
 shader_parameter/alpha = 0.0
 shader_parameter/red_multiplier = 0.0
 
-[node name="main" type="Node2D" unique_id=1425132053]
+[node name="main" type="Node2D" unique_id=1425132053 groups=["load_level"]]
 script = ExtResource("1_bo1nx")
 stretchiness = 200.0
 string_power = 1.75
 player_range = 360.0
 
+[node name="level" type="Node2D" parent="." unique_id=741024077]
+
 [node name="level_test" parent="." unique_id=673225537 instance=ExtResource("4_jjvhh")]
+visible = false
 metadata/_edit_lock_ = true
 
 [node name="Cam" type="Camera2D" parent="." unique_id=1260990897]

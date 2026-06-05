@@ -3,6 +3,7 @@ var line: Line2D
 
 @onready var player := $Player
 @onready var cam := $Cam
+@onready var level_scene
 @onready var raycast_wall := $Player/RayCast_wall
 @onready var raycast_point := $Player/cast_point/point
 @onready var raycast_silky := $Player/RayCast_silky
@@ -23,6 +24,7 @@ var distance : float
 var cam_wobble : Vector2 = Vector2(0,0)
 
 func _ready() -> void:
+	Global._loadlevel(Global.cur_level)
 	line = Line2D.new()
 	$line.add_child(line)
 	
@@ -45,9 +47,7 @@ func _physics_process(delta: float) -> void:
 	
 	if Global.health <= 0:
 		await get_tree().create_timer(2).timeout
-		Global.health = 100
-		Global.is_swinging = false
-		get_tree().reload_current_scene()
+		Global._reset()
 	
 func create_line(player_pos: Vector2):
 	distance = player_pos.distance_to(Global.string_target)
@@ -118,3 +118,10 @@ func _checkinput() -> void:
 				
 	if Input.is_action_just_pressed("heal"):
 		if Global.health > 0: Global.health += 5
+		Global._reset()
+		
+func _loadlevel(index: int):
+	level_scene = load("res://Levels/level_test.tscn")
+	var label_inst = level_scene.instantiate()
+	$level.add_child(label_inst)
+	
