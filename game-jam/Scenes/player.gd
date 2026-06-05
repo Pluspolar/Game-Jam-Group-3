@@ -58,14 +58,16 @@ func _physics_process(delta: float) -> void:
 		
 	if not Global.is_swinging and is_on_floor() and Input.is_action_just_pressed("jump"):
 		_hurt_jump(jump_dmg)
-		velocity.y = -300
+		Global._shake(1.8)
+		velocity.y = -375
 	
 	if not Global.is_swinging and is_on_ceiling() and Input.is_action_just_pressed("jump"):
 		is_sticking = false
 		velocity.y = 100
 			
 	if not Global.is_swinging and is_on_wall() and Input.is_action_just_pressed("jump"):
-		velocity.y = -300
+		velocity.y = -375
+		Global._shake(0.7)
 		_hurt_jump(wall_jump_dmg)
 		
 		if get_wall_normal().x < 0:
@@ -89,6 +91,7 @@ func _physics_process(delta: float) -> void:
 	if is_on_wall() and abs(old_vel.x) + abs(old_vel.y)*0.5 > 1250 and not already_on_wall:
 		velocity.x = old_vel.x*-0.1
 		already_on_wall = true
+		Global._shake(6)
 		_hurt(abs(old_vel.x)*fall_multiplier)
 		if get_wall_normal().x < 0:
 			$Reversable/particles/right.restart()
@@ -99,6 +102,7 @@ func _physics_process(delta: float) -> void:
 	
 	if is_on_ceiling():
 		if abs(old_vel.x)*0.5 + abs(old_vel.y) >= 1000:
+			Global._shake(6)
 			_hurt(abs(old_vel.y)*fall_multiplier)
 			$Reversable/particles/up.restart()
 			velocity.y = old_vel.y*-0.1
@@ -113,6 +117,7 @@ func _physics_process(delta: float) -> void:
 			
 	if is_on_floor() or (is_on_wall() and abs(get_wall_normal().x) < 0.8):
 		if abs(old_vel.x)*0.5 + abs(old_vel.y) >= 1000:
+			Global._shake(6)
 			_hurt(abs(old_vel.y)*fall_multiplier)
 			velocity.y = old_vel.y*-0.2
 			is_sticking = false
@@ -129,9 +134,11 @@ func _physics_process(delta: float) -> void:
 		position.x = get_viewport_rect().size.x - hitbox_half_width
 		velocity.x = old_vel.x*-0.5
 		
-	var overlapping_areas = $cast_point.get_overlapping_areas()
+	var overlapping_areas = $cast_point.get_overlapping_bodies()
 	if overlapping_areas.size() > 0: cast_entered = true
 	else: cast_entered = false
+	#if $RayCast_silky.is_colliding: cast_entered = true
+	
 	
 	if hurt_timer > 0:
 		hurt_timer -= 1 * delta

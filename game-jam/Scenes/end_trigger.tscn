@@ -1,9 +1,10 @@
-[gd_scene format=3 uid="uid://cievq2jhecrnb"]
+[gd_scene format=4 uid="uid://cievq2jhecrnb"]
 
 [ext_resource type="Script" uid="uid://drnws8vrxgl1b" path="res://Scenes/end.gd" id="1_0dmti"]
+[ext_resource type="Texture2D" uid="uid://spr75g8holbp" path="res://Sprites/tileset_1.png" id="2_7hhj4"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_7hhj4"]
-size = Vector2(171.5, 82)
+size = Vector2(215.75, 88)
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_veowf"]
 size = Vector2(894, 82)
@@ -14,7 +15,41 @@ size = Vector2(966, 82)
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_0dmti"]
 size = Vector2(966, 82)
 
+[sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_veowf"]
+texture = ExtResource("2_7hhj4")
+texture_region_size = Vector2i(96, 96)
+0:0/0 = 0
+0:0/0/physics_layer_0/polygon_0/points = PackedVector2Array(-48, -48, 48, -48, 48, 48, -48, 48)
+1:0/0 = 0
+1:0/0/physics_layer_0/polygon_0/points = PackedVector2Array(-48, -48, 48, -48, 48, 48, -48, 48)
+2:0/0 = 0
+2:0/0/physics_layer_0/polygon_0/points = PackedVector2Array(48, -48, -48, -48, -48, 48, 48, 48)
+0:1/0 = 0
+0:1/0/physics_layer_0/polygon_0/points = PackedVector2Array(-48, -48, 48, -48, 48, 48, -48, 48)
+1:1/0 = 0
+1:1/0/physics_layer_0/polygon_0/points = PackedVector2Array(-48, -48, 48, -48, 48, 48, -48, 48)
+2:1/0 = 0
+2:1/0/physics_layer_0/polygon_0/points = PackedVector2Array(-48, -48, 48, -48, 48, 48, -48, 48)
+0:2/0 = 0
+0:2/0/physics_layer_0/polygon_0/points = PackedVector2Array(-48, -48, 48, -48, 48, 48, -48, 48)
+1:2/0 = 0
+1:2/0/physics_layer_0/polygon_0/points = PackedVector2Array(-48, -48, 48, -48, 48, 48, -48, 48)
+2:2/0 = 0
+2:2/0/physics_layer_0/polygon_0/points = PackedVector2Array(-48, -48, 48, -48, 48, 48, -48, 48)
+
+[sub_resource type="TileSet" id="TileSet_sle2r"]
+tile_size = Vector2i(96, 96)
+physics_layer_0/collision_layer = 2
+sources/0 = SubResource("TileSetAtlasSource_veowf")
+
 [node name="end_trigger" type="Node2D" unique_id=1149071925]
+
+[node name="ColorRect" type="ColorRect" parent="." unique_id=1021698602]
+offset_left = -1006.0
+offset_top = -1264.0
+offset_right = 1051.0
+offset_bottom = -80.0
+color = Color(0, 0, 0, 1)
 
 [node name="end" type="Area2D" parent="." unique_id=2014418938]
 collision_layer = 8
@@ -22,7 +57,7 @@ collision_mask = 16
 script = ExtResource("1_0dmti")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="end" unique_id=476913220]
-position = Vector2(8, -22)
+position = Vector2(2, -48)
 shape = SubResource("RectangleShape2D_7hhj4")
 debug_color = Color(0, 0.6446726, 0.2824021, 0.41960785)
 
@@ -30,15 +65,20 @@ debug_color = Color(0, 0.6446726, 0.2824021, 0.41960785)
 collision_layer = 2
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="solid" unique_id=1683872481]
-position = Vector2(-524, -22)
+position = Vector2(-550, -54)
 shape = SubResource("RectangleShape2D_veowf")
 
 [node name="CollisionShape2D2" type="CollisionShape2D" parent="solid" unique_id=436868707]
-position = Vector2(577, -22)
+position = Vector2(588, -50)
 shape = SubResource("RectangleShape2D_sle2r")
 
 [node name="CollisionShape2D3" type="CollisionShape2D" parent="solid" unique_id=477151438]
-position = Vector2(7, -101)
+position = Vector2(5, -117)
 shape = SubResource("RectangleShape2D_0dmti")
+
+[node name="solid2" type="TileMapLayer" parent="." unique_id=223602243]
+scale = Vector2(0.5, 0.5)
+tile_map_data = PackedByteArray("AAD1////AAABAAIAAAD2////AAABAAIAAAD3////AAABAAIAAAD4////AAABAAIAAAD5////AAABAAIAAAD6////AAABAAIAAAD7////AAABAAIAAAD8////AAABAAIAAAD9////AAACAAIAAADs////AAABAAIAAADt////AAABAAIAAADu////AAABAAIAAADv////AAABAAIAAADw////AAABAAIAAADx////AAABAAIAAADy////AAABAAIAAADz////AAABAAIAAAD0////AAABAAIAAADr////AAAAAAIAAADr//7/AAAAAAAAAADs//7/AAABAAAAAADt//7/AAABAAAAAADu//7/AAABAAAAAADv//7/AAABAAAAAADw//7/AAABAAAAAADx//7/AAABAAAAAADy//7/AAABAAAAAADz//7/AAABAAAAAAD0//7/AAABAAAAAAD1//7/AAABAAAAAAD2//7/AAABAAAAAAD3//7/AAABAAAAAAD4//7/AAABAAAAAAD5//7/AAABAAAAAAD6//7/AAABAAAAAAD7//7/AAABAAAAAAD8//7/AAABAAAAAAD9//7/AAACAAAAAAACAP//AAAAAAIAAAACAP7/AAAAAAAAAAADAP7/AAABAAAAAAAEAP7/AAABAAAAAAAFAP7/AAABAAAAAAAGAP7/AAABAAAAAAAHAP7/AAABAAAAAAAIAP7/AAABAAAAAAAJAP7/AAABAAAAAAAKAP7/AAABAAAAAAALAP7/AAABAAAAAAAMAP7/AAABAAAAAAANAP7/AAABAAAAAAAOAP7/AAABAAAAAAAPAP7/AAABAAAAAAAQAP7/AAABAAAAAAARAP7/AAABAAAAAAASAP7/AAABAAAAAAATAP7/AAABAAAAAAAUAP7/AAABAAAAAAAVAP7/AAACAAAAAAADAP//AAABAAIAAAAEAP//AAABAAIAAAAFAP//AAABAAIAAAAGAP//AAABAAIAAAAHAP//AAABAAIAAAAIAP//AAABAAIAAAAJAP//AAABAAIAAAAKAP//AAABAAIAAAALAP//AAABAAIAAAAMAP//AAABAAIAAAANAP//AAABAAIAAAAOAP//AAABAAIAAAAPAP//AAABAAIAAAAQAP//AAABAAIAAAARAP//AAABAAIAAAASAP//AAABAAIAAAATAP//AAABAAIAAAAUAP//AAABAAIAAAAVAP//AAACAAIAAAA=")
+tile_set = SubResource("TileSet_sle2r")
 
 [connection signal="body_entered" from="end" to="end" method="_on_body_entered"]

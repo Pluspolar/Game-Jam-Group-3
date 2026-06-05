@@ -1,0 +1,19 @@
+[gd_scene format=3 uid="uid://cit8h6howgrt2"]
+
+[ext_resource type="Script" uid="uid://cpsa33kre7ihj" path="res://Scenes/marker.gd" id="1_sim3q"]
+[ext_resource type="Texture2D" uid="uid://qxy4rn2fm8bx" path="res://Sprites/target.png" id="2_nj2v6"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_omavh"]
+size = Vector2(22, 22)
+
+[node name="mark" type="Area2D" unique_id=1129212387]
+script = ExtResource("1_sim3q")
+
+[node name="mark_hitbox" type="CollisionShape2D" parent="." unique_id=1464570658]
+shape = SubResource("RectangleShape2D_omavh")
+
+[node name="sprite" type="Sprite2D" parent="." unique_id=1983118140]
+modulate = Color(0, 18.892157, 0, 1)
+texture_filter = 1
+scale = Vector2(3, 3)
+texture = ExtResource("2_nj2v6")

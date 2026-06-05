@@ -6,14 +6,20 @@
 [ext_resource type="Texture2D" uid="uid://qxy4rn2fm8bx" path="res://Sprites/target.png" id="4_jjvhh"]
 [ext_resource type="Script" uid="uid://dsgq1svepls0p" path="res://Scenes/lava.gd" id="5_21xkr"]
 [ext_resource type="Texture2D" uid="uid://db1erwblrn6fo" path="res://Sprites/lava.png" id="5_kry3j"]
+[ext_resource type="Texture2D" uid="uid://c3dvdoggoyp2t" path="res://Sprites/injured.png" id="8_ynf5e"]
+[ext_resource type="Texture2D" uid="uid://vfg0im3y7sg0" path="res://Sprites/healed.png" id="9_hptm8"]
+[ext_resource type="PackedScene" uid="uid://cit8h6howgrt2" path="res://Scenes/mark.tscn" id="9_ynf5e"]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_ynf5e"]
+radius = 1.4142137
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_21xkr"]
+size = Vector2(1306, 1446)
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_jjvhh"]
 shader = ExtResource("1_jjvhh")
 shader_parameter/alpha = 0.0
 shader_parameter/red_multiplier = 0.0
-
-[sub_resource type="RectangleShape2D" id="RectangleShape2D_21xkr"]
-size = Vector2(1306, 1446)
 
 [node name="main" type="Node2D" unique_id=1425132053 groups=["load_level"]]
 script = ExtResource("1_bo1nx")
@@ -23,24 +29,18 @@ player_range = 360.0
 
 [node name="level" type="Node2D" parent="." unique_id=741024077]
 
-[node name="Cam" type="Camera2D" parent="." unique_id=1260990897]
-position = Vector2(640, 360)
-
-[node name="CanvasLayer" type="CanvasLayer" parent="Cam" unique_id=201327624]
-
-[node name="ColorRect" type="ColorRect" parent="Cam/CanvasLayer" unique_id=913092248]
-material = SubResource("ShaderMaterial_jjvhh")
-anchors_preset = 15
-anchor_right = 1.0
-anchor_bottom = 1.0
-grow_horizontal = 2
-grow_vertical = 2
-size_flags_horizontal = 4
-
 [node name="line" type="Node2D" parent="." unique_id=1119453770]
 
 [node name="Player" parent="." unique_id=38737271 instance=ExtResource("1_jjgbg")]
 position = Vector2(669, 580)
+
+[node name="pointer" type="Area2D" parent="." unique_id=1319541080]
+rotation = 0.7853982
+scale = Vector2(1.9999999, 1.9999999)
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="pointer" unique_id=2013096544]
+shape = SubResource("CircleShape2D_ynf5e")
+debug_color = Color(0.90304583, 0.30852312, 1.92523e-07, 0.41960785)
 
 [node name="target" type="Sprite2D" parent="." unique_id=784033697]
 texture_filter = 1
@@ -51,6 +51,7 @@ texture = ExtResource("4_jjvhh")
 [node name="lava" type="Area2D" parent="." unique_id=380609440]
 collision_layer = 32
 script = ExtResource("5_21xkr")
+speed = 40.0
 
 [node name="Sprite2D2" type="Sprite2D" parent="lava" unique_id=1113092982]
 texture_filter = 1
@@ -68,3 +69,39 @@ texture = ExtResource("5_kry3j")
 position = Vector2(640, 2374)
 shape = SubResource("RectangleShape2D_21xkr")
 debug_color = Color(0.99607843, 0, 0, 0.41960785)
+
+[node name="Cam" type="Camera2D" parent="." unique_id=1260990897]
+position = Vector2(640, 360)
+
+[node name="CanvasLayer" type="CanvasLayer" parent="Cam" unique_id=201327624]
+
+[node name="ColorRect" type="ColorRect" parent="Cam/CanvasLayer" unique_id=913092248]
+material = SubResource("ShaderMaterial_jjvhh")
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+size_flags_horizontal = 4
+
+[node name="injury" type="Node2D" parent="Cam" unique_id=545890367]
+scale = Vector2(8, 8)
+
+[node name="injured" type="Sprite2D" parent="Cam/injury" unique_id=97986094]
+texture_filter = 1
+scale = Vector2(0.5, 0.5)
+texture = ExtResource("8_ynf5e")
+
+[node name="healed" type="Sprite2D" parent="Cam/injury" unique_id=648242670]
+texture_filter = 1
+scale = Vector2(0.5, 0.5)
+texture = ExtResource("9_hptm8")
+
+[node name="injury_line" type="Node2D" parent="Cam" unique_id=787113020]
+position = Vector2(-640, -360)
+
+[node name="mark" parent="Cam" unique_id=1129212387 instance=ExtResource("9_ynf5e")]
+position = Vector2(-640, -360)
+
+[connection signal="area_entered" from="Cam/mark" to="." method="_on_mark_area_entered"]
+[connection signal="area_exited" from="Cam/mark" to="." method="_on_mark_area_exited"]

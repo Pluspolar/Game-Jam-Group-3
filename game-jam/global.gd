@@ -6,12 +6,20 @@ var timer: float = 0
 var health: float = 100
 var cur_level: int = 0
 var unlocked_level: int = 0
+var is_healing: bool = false
+var shake: Vector2 = Vector2(0,0)
+var shake_timer : float = 0
 
 func _process(delta: float) -> void:
 	timer += 100 * delta
 	
 	if Global.health > 100:
 		Global.health = 100
+
+	shake_timer += 1 * delta
+	if shake_timer >= 0.035:
+		shake *= -pow(0.9, 60 * delta)
+		shake_timer = 0
 
 func _unhandled_input(event: InputEvent) -> void:
 	if event.is_action_pressed("jump") and is_swinging:
@@ -28,10 +36,13 @@ func _nextlevel():
 
 func _reset():
 	health = 100
+	is_healing = false
 	is_swinging = false
 	get_tree().call_deferred("reload_current_scene")
 	#await get_tree().create_timer(0.01).timeout
 	#_loadlevel(cur_level)
 	
-	
+func _shake(shake_intensity: float):
+	var random_dir = randf_range(0, 360)
+	shake = Vector2(sin(random_dir)*shake_intensity, cos(random_dir)*shake_intensity)
 	

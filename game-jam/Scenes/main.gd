@@ -1,10 +1,12 @@
 extends Node2D
 var line: Line2D
+var line_heal: Line2D
 
 @onready var player := $Player
 @onready var cam := $Cam
 @onready var level_scene
 @onready var raycast_wall := $Player/RayCast_wall
+@onready var mark := $Cam/mark
 @onready var raycast_point := $Player/cast_point/point
 @onready var raycast_silky := $Player/RayCast_silky
 @onready var color_rect := $Cam/CanvasLayer/ColorRect
@@ -18,12 +20,16 @@ var line: Line2D
 @export var player_range: float = 400.0
 @onready var old_cam : Vector2 = cam.position
 
+var cur_stitch : int = 0
 var global_mouse_pos : Vector2
 var strecth_amount : float = 0
 var distance : float
 var cam_wobble : Vector2 = Vector2(0,0)
+var marker_entered: bool = false
+var coords_heal: Array = []
 
 func _ready() -> void:
+	mark.hide()
 	$Cam.global_position = $Player.global_position
 	Global._loadlevel(Global.cur_level)
 	line = Line2D.new()
@@ -33,6 +39,13 @@ func _ready() -> void:
 	line.default_color = Color(1, 1, 1, 0.5)
 	line.antialiased = true
 	
+	line_heal = Line2D.new()
+	$Cam/injury_line.add_child(line_heal)
+	
+	line_heal.width = 4
+	line_heal.default_color = Color(1, 1, 1, 0.6)
+	line_heal.antialiased = true
+	
 func _physics_process(delta: float) -> void:
 	global_mouse_pos = get_global_mouse_position()
 	
@@ -40,6 +53,7 @@ func _physics_process(delta: float) -> void:
 	_cam(delta)
 	_raycast()
 	_checkinput()
+	show_injury_marker()
 	
 	color_rect.material.set_shader_parameter("alpha", 1-Global.health/100)
 	if Global.health > 0: 
@@ -47,6 +61,8 @@ func _physics_process(delta: float) -> void:
 	else: color_rect.material.set_shader_parameter("red_multiplier", 1.0)
 	
 	if Global.health <= 0:
+		line_heal.clear_points()
+		Global.is_healing = false
 		await get_tree().create_timer(2).timeout
 		Global._reset()
 	
@@ -93,8 +109,9 @@ func _cam(delta : float) -> void:
 	player_velocity_limit = player_velocity_limit*0.1 + player.position.y + (get_viewport().get_mouse_position().y-(get_viewport().size.y/2))*0.2
 	if cam_interpolation < 1: old_cam.y += (player_velocity_limit - old_cam.y) * cam_interpolation
 	else: old_cam.y = player_velocity_limit
-	cam.position = old_cam
+	cam.position = old_cam + Global.shake
 	cam.position += cam_wobble
+
 
 func _raycast() -> void:
 	raycast_wall.target_position = global_mouse_pos - raycast_wall.global_position
@@ -114,8 +131,21 @@ func _raycast() -> void:
 		if player.cast_entered: $target.modulate = Color(0,10,0,1)
 		else: $target.modulate = Color(1,1,1,1)
 	
+	$pointer.position = global_mouse_pos
+	
+func show_injury_marker() -> void:
+	if Global.is_healing:
+		$Cam/injury.show()
+		mark.show()
+			
+		mark.position = coords_heal[cur_stitch]
+	else: 
+		$Cam/injury/healed.hide()
+		$Cam/injury.hide()
+		mark.hide()
+	
 func _checkinput() -> void:
-	if Input.is_action_just_pressed("shoot") and player.hurt_timer <= 0:
+	if Input.is_action_just_pressed("shoot") and player.hurt_timer <= 0 and not Global.is_healing:
 		if raycast_wall.is_colliding() or raycast_silky.is_colliding():
 			if str(raycast_wall.get_collider()).containsn("solid"): 
 				Global.string_target = raycast_wall.get_collision_point()
@@ -125,11 +155,45 @@ func _checkinput() -> void:
 				Global.string_target = raycast_silky.get_collision_point()
 				Global.is_swinging = true
 				
-	if Input.is_action_just_pressed("heal"):
-		if Global.health > 0: Global.health += 5
+	if Input.is_action_just_pressed("shoot") and Global.is_healing:
+		if marker_entered: 
+			if cur_stitch == 0: line_heal.add_point(get_viewport().get_mouse_position())
+			line_heal.add_point(get_viewport().get_mouse_position())
+			if cur_stitch < coords_heal.size() - 1: cur_stitch += 1
+			else: 
+				$Cam/injury/healed.show()
+				await get_tree().create_timer(0.3).timeout 
+				Global.is_healing = false
+				Global.health = 100
+				line_heal.clear_points()
+		else: 
+			Global._shake(5)
+			Global.health -= 10
+				
+	if Input.is_action_just_pressed("heal") and Global.health > 0:
+		line_heal.clear_points()
+		if Global.is_healing: 
+			Global.is_healing = false
+		else: 
+			cur_stitch = 0
+			Global.is_healing = true
+			heal_coords()
 		
+func heal_coords():
+	coords_heal.clear()
+	var start_ycoords: float = randf_range(-200,-150)
+	var coords_random: int = randi_range(4,7) # ycoords randf_range(120,580)
+	for i in range(coords_random):
+		if i % 2 == 0: coords_heal.append(Vector2(randf_range(-150,-100), start_ycoords + (float(i)/float(coords_random) * randf_range(360, 380))))
+		else: coords_heal.append(Vector2(randf_range(150,100), start_ycoords + (float(i)/float(coords_random) * randf_range(360, 380))))
+
 func _loadlevel(index: int):
 	level_scene = load("res://Levels/level_test.tscn")
 	var label_inst = level_scene.instantiate()
 	$level.add_child(label_inst)
-	
+
+func _on_mark_area_entered(area: Area2D) -> void:
+	if area.name == "pointer": marker_entered = true
+
+func _on_mark_area_exited(area: Area2D) -> void:
+	if area.name == "pointer": marker_entered = false
