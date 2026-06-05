@@ -1,3 +1,235 @@
 [gd_scene format=3 uid="uid://b18cen8c8wyyv"]
 
-[node name="level_menu" type="Node2D" unique_id=1494967526]
+[ext_resource type="FontFile" uid="uid://cyge4tlc7d2iw" path="res://Sprites/pixel font/dogicapixelbold.ttf" id="1_4bw2l"]
+[ext_resource type="Script" uid="uid://cxveonree464e" path="res://Scenes/button_level.gd" id="2_4bw2l"]
+[ext_resource type="Script" uid="uid://dso11k6berfbt" path="res://Scenes/button.gd" id="2_64jxr"]
+[ext_resource type="Texture2D" uid="uid://dl1ql0s1u6whs" path="res://Sprites/background/1-back.png" id="3_51how"]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_iio8b"]
+bg_color = Color(0.4149491, 0.4149491, 0.4149491, 1)
+border_width_left = 10
+border_width_top = 10
+border_width_right = 10
+border_width_bottom = 10
+border_color = Color(0.23753911, 0.23753914, 0.23753911, 1)
+corner_detail = 2
+shadow_color = Color(0.11858138, 0.11858138, 0.11858138, 0.6)
+shadow_size = 9
+shadow_offset = Vector2(15, 15)
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_cjntd"]
+bg_color = Color(0.16206548, 0.16206563, 0.16206554, 1)
+border_width_left = 10
+border_width_top = 10
+border_width_right = 10
+border_width_bottom = 10
+border_color = Color(0.6789437, 0.6789437, 0.6789436, 1)
+corner_detail = 2
+shadow_color = Color(0.11858138, 0.11858138, 0.11858138, 0.6)
+shadow_size = 9
+shadow_offset = Vector2(15, 15)
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_dsbtr"]
+bg_color = Color(0.27387273, 0.27387273, 0.27387273, 1)
+border_width_left = 10
+border_width_top = 10
+border_width_right = 10
+border_width_bottom = 10
+border_color = Color(0.3647059, 0.3647059, 0.3647059, 1)
+corner_detail = 2
+shadow_color = Color(0.11858138, 0.11858138, 0.11858138, 0.6)
+shadow_size = 9
+shadow_offset = Vector2(15, 15)
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_64jxr"]
+bg_color = Color(0.4149491, 0.4149491, 0.4149491, 1)
+border_width_left = 10
+border_width_top = 10
+border_width_right = 10
+border_width_bottom = 10
+border_color = Color(0.23753911, 0.23753914, 0.23753911, 1)
+corner_detail = 2
+shadow_color = Color(0.11858138, 0.11858138, 0.11858138, 0.6)
+shadow_size = 9
+shadow_offset = Vector2(15, 15)
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_51how"]
+bg_color = Color(0.16206548, 0.16206563, 0.16206554, 1)
+border_width_left = 10
+border_width_top = 10
+border_width_right = 10
+border_width_bottom = 10
+border_color = Color(0.6789437, 0.6789437, 0.6789436, 1)
+corner_detail = 2
+shadow_color = Color(0.11858138, 0.11858138, 0.11858138, 0.6)
+shadow_size = 9
+shadow_offset = Vector2(15, 15)
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_3ie8g"]
+bg_color = Color(0.27387273, 0.27387273, 0.27387273, 1)
+border_width_left = 10
+border_width_top = 10
+border_width_right = 10
+border_width_bottom = 10
+border_color = Color(0.3647059, 0.3647059, 0.3647059, 1)
+corner_detail = 2
+shadow_color = Color(0.11858138, 0.11858138, 0.11858138, 0.6)
+shadow_size = 9
+shadow_offset = Vector2(15, 15)
+
+[node name="level_menu" type="Node2D" unique_id=1017686783]
+
+[node name="CanvasLayer" type="CanvasLayer" parent="." unique_id=810063004]
+
+[node name="Control" type="Node2D" parent="CanvasLayer" unique_id=1951973570]
+position = Vector2(115.6, 296.305)
+
+[node name="level 1" type="Button" parent="CanvasLayer/Control" unique_id=1956891892]
+custom_minimum_size = Vector2(125, 125)
+offset_right = 125.0
+offset_bottom = 125.0
+pivot_offset = Vector2(62, 68)
+theme_override_colors/font_pressed_color = Color(0.2, 0.2, 0.2, 1)
+theme_override_colors/font_outline_color = Color(0.52906674, 0.52906674, 0.52906656, 1)
+theme_override_constants/outline_size = 20
+theme_override_fonts/font = ExtResource("1_4bw2l")
+theme_override_font_sizes/font_size = 67
+theme_override_styles/normal = SubResource("StyleBoxFlat_iio8b")
+theme_override_styles/pressed = SubResource("StyleBoxFlat_cjntd")
+theme_override_styles/hover = SubResource("StyleBoxFlat_dsbtr")
+text = "1"
+icon_alignment = 1
+script = ExtResource("2_4bw2l")
+level_id = 1
+
+[node name="level 2" type="Button" parent="CanvasLayer/Control" unique_id=251223150]
+custom_minimum_size = Vector2(125, 125)
+offset_left = 225.0
+offset_right = 350.0
+offset_bottom = 125.0
+pivot_offset = Vector2(63, 61)
+theme_override_colors/font_pressed_color = Color(0.2, 0.2, 0.2, 1)
+theme_override_colors/font_outline_color = Color(0.52906674, 0.52906674, 0.52906656, 1)
+theme_override_constants/outline_size = 20
+theme_override_fonts/font = ExtResource("1_4bw2l")
+theme_override_font_sizes/font_size = 67
+theme_override_styles/normal = SubResource("StyleBoxFlat_iio8b")
+theme_override_styles/pressed = SubResource("StyleBoxFlat_cjntd")
+theme_override_styles/hover = SubResource("StyleBoxFlat_dsbtr")
+text = "2"
+icon_alignment = 1
+script = ExtResource("2_4bw2l")
+level_id = 2
+
+[node name="level 3" type="Button" parent="CanvasLayer/Control" unique_id=1725688260]
+custom_minimum_size = Vector2(125, 125)
+offset_left = 450.0
+offset_right = 575.0
+offset_bottom = 125.0
+pivot_offset = Vector2(62, 62)
+theme_override_colors/font_pressed_color = Color(0.2, 0.2, 0.2, 1)
+theme_override_colors/font_outline_color = Color(0.52906674, 0.52906674, 0.52906656, 1)
+theme_override_constants/outline_size = 20
+theme_override_fonts/font = ExtResource("1_4bw2l")
+theme_override_font_sizes/font_size = 67
+theme_override_styles/normal = SubResource("StyleBoxFlat_iio8b")
+theme_override_styles/pressed = SubResource("StyleBoxFlat_cjntd")
+theme_override_styles/hover = SubResource("StyleBoxFlat_dsbtr")
+text = "3"
+icon_alignment = 1
+script = ExtResource("2_4bw2l")
+level_id = 3
+
+[node name="level 4" type="Button" parent="CanvasLayer/Control" unique_id=1064083801]
+custom_minimum_size = Vector2(125, 125)
+offset_left = 675.0
+offset_right = 800.0
+offset_bottom = 125.0
+pivot_offset = Vector2(60.400024, 63.695007)
+theme_override_colors/font_pressed_color = Color(0.2, 0.2, 0.2, 1)
+theme_override_colors/font_outline_color = Color(0.52906674, 0.52906674, 0.52906656, 1)
+theme_override_constants/outline_size = 20
+theme_override_fonts/font = ExtResource("1_4bw2l")
+theme_override_font_sizes/font_size = 67
+theme_override_styles/normal = SubResource("StyleBoxFlat_iio8b")
+theme_override_styles/pressed = SubResource("StyleBoxFlat_cjntd")
+theme_override_styles/hover = SubResource("StyleBoxFlat_dsbtr")
+text = "4"
+icon_alignment = 1
+script = ExtResource("2_4bw2l")
+level_id = 4
+
+[node name="level 5" type="Button" parent="CanvasLayer/Control" unique_id=262164441]
+custom_minimum_size = Vector2(125, 125)
+offset_left = 900.0
+offset_right = 1025.0
+offset_bottom = 125.0
+pivot_offset = Vector2(61.400024, 61.695007)
+theme_override_colors/font_pressed_color = Color(0.2, 0.2, 0.2, 1)
+theme_override_colors/font_outline_color = Color(0.52906674, 0.52906674, 0.52906656, 1)
+theme_override_constants/outline_size = 20
+theme_override_fonts/font = ExtResource("1_4bw2l")
+theme_override_font_sizes/font_size = 67
+theme_override_styles/normal = SubResource("StyleBoxFlat_iio8b")
+theme_override_styles/pressed = SubResource("StyleBoxFlat_cjntd")
+theme_override_styles/hover = SubResource("StyleBoxFlat_dsbtr")
+text = "5"
+icon_alignment = 1
+script = ExtResource("2_4bw2l")
+level_id = 5
+
+[node name="back_button" type="Button" parent="CanvasLayer" unique_id=2032207776]
+anchors_preset = 2
+anchor_top = 1.0
+anchor_bottom = 1.0
+offset_left = 90.0
+offset_top = -168.0
+offset_right = 369.0
+offset_bottom = -70.0
+grow_vertical = 0
+pivot_offset = Vector2(139, 50)
+theme_override_colors/font_pressed_color = Color(0.2, 0.2, 0.2, 1)
+theme_override_colors/font_outline_color = Color(0.52906674, 0.52906674, 0.52906656, 1)
+theme_override_constants/outline_size = 20
+theme_override_fonts/font = ExtResource("1_4bw2l")
+theme_override_font_sizes/font_size = 50
+theme_override_styles/normal = SubResource("StyleBoxFlat_64jxr")
+theme_override_styles/pressed = SubResource("StyleBoxFlat_51how")
+theme_override_styles/hover = SubResource("StyleBoxFlat_3ie8g")
+text = "BACK"
+icon_alignment = 1
+script = ExtResource("2_64jxr")
+scene_id = "menu"
+
+[node name="background" type="Parallax2D" parent="." unique_id=1399885400]
+modulate = Color(0.79624295, 0.796243, 0.7962429, 1)
+repeat_size = Vector2(0, 2532)
+autoscroll = Vector2(0, 100)
+repeat_times = 2
+metadata/_edit_lock_ = true
+
+[node name="Sprite2D" type="Sprite2D" parent="background" unique_id=1521117066]
+texture_filter = 1
+position = Vector2(648.99994, 909.99994)
+scale = Vector2(4.379487, 3.4905214)
+texture = ExtResource("3_51how")
+metadata/_edit_lock_ = true
+
+[connection signal="button_down" from="CanvasLayer/Control/level 1" to="CanvasLayer/Control/level 1" method="_on_button_down"]
+[connection signal="mouse_entered" from="CanvasLayer/Control/level 1" to="CanvasLayer/Control/level 1" method="_on_mouse_entered"]
+[connection signal="mouse_exited" from="CanvasLayer/Control/level 1" to="CanvasLayer/Control/level 1" method="_on_mouse_exited"]
+[connection signal="button_down" from="CanvasLayer/Control/level 2" to="CanvasLayer/Control/level 2" method="_on_button_down"]
+[connection signal="mouse_entered" from="CanvasLayer/Control/level 2" to="CanvasLayer/Control/level 2" method="_on_mouse_entered"]
+[connection signal="mouse_exited" from="CanvasLayer/Control/level 2" to="CanvasLayer/Control/level 2" method="_on_mouse_exited"]
+[connection signal="button_down" from="CanvasLayer/Control/level 3" to="CanvasLayer/Control/level 3" method="_on_button_down"]
+[connection signal="mouse_entered" from="CanvasLayer/Control/level 3" to="CanvasLayer/Control/level 3" method="_on_mouse_entered"]
+[connection signal="mouse_exited" from="CanvasLayer/Control/level 3" to="CanvasLayer/Control/level 3" method="_on_mouse_exited"]
+[connection signal="button_down" from="CanvasLayer/Control/level 4" to="CanvasLayer/Control/level 4" method="_on_button_down"]
+[connection signal="mouse_entered" from="CanvasLayer/Control/level 4" to="CanvasLayer/Control/level 4" method="_on_mouse_entered"]
+[connection signal="mouse_exited" from="CanvasLayer/Control/level 4" to="CanvasLayer/Control/level 4" method="_on_mouse_exited"]
+[connection signal="button_down" from="CanvasLayer/Control/level 5" to="CanvasLayer/Control/level 5" method="_on_button_down"]
+[connection signal="mouse_entered" from="CanvasLayer/Control/level 5" to="CanvasLayer/Control/level 5" method="_on_mouse_entered"]
+[connection signal="mouse_exited" from="CanvasLayer/Control/level 5" to="CanvasLayer/Control/level 5" method="_on_mouse_exited"]
+[connection signal="button_down" from="CanvasLayer/back_button" to="CanvasLayer/back_button" method="_on_button_down"]
+[connection signal="mouse_entered" from="CanvasLayer/back_button" to="CanvasLayer/back_button" method="_on_mouse_entered"]
+[connection signal="mouse_exited" from="CanvasLayer/back_button" to="CanvasLayer/back_button" method="_on_mouse_exited"]

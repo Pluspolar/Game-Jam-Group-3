@@ -29,7 +29,7 @@ func _nextlevel():
 func _reset():
 	health = 100
 	is_swinging = false
-	get_tree().reload_current_scene()
+	get_tree().call_deferred("reload_current_scene")
 	#await get_tree().create_timer(0.01).timeout
 	#_loadlevel(cur_level)
 	

@@ -24,6 +24,7 @@ var distance : float
 var cam_wobble : Vector2 = Vector2(0,0)
 
 func _ready() -> void:
+	$Cam.global_position = $Player.global_position
 	Global._loadlevel(Global.cur_level)
 	line = Line2D.new()
 	$line.add_child(line)
@@ -105,10 +106,18 @@ func _raycast() -> void:
 	raycast_silky.target_position = player.global_position - raycast_silky.global_position
 	raycast_point.position = raycast_wall.target_position
 	
+	if raycast_wall.get_collider(): 
+		$target.global_position = raycast_wall.get_collision_point()
+		$target.modulate = Color(0,10,0,1)
+	else: 
+		$target.global_position = raycast_point.global_position
+		if player.cast_entered: $target.modulate = Color(0,10,0,1)
+		else: $target.modulate = Color(1,1,1,1)
+	
 func _checkinput() -> void:
 	if Input.is_action_just_pressed("shoot") and player.hurt_timer <= 0:
 		if raycast_wall.is_colliding() or raycast_silky.is_colliding():
-			if str(raycast_wall.get_collider()).contains("solid"): 
+			if str(raycast_wall.get_collider()).containsn("solid"): 
 				Global.string_target = raycast_wall.get_collision_point()
 				Global.is_swinging = true
 				
@@ -118,7 +127,6 @@ func _checkinput() -> void:
 				
 	if Input.is_action_just_pressed("heal"):
 		if Global.health > 0: Global.health += 5
-		Global._reset()
 		
 func _loadlevel(index: int):
 	level_scene = load("res://Levels/level_test.tscn")

@@ -11,6 +11,9 @@ size = Vector2(894, 82)
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_sle2r"]
 size = Vector2(966, 82)
 
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_0dmti"]
+size = Vector2(966, 82)
+
 [node name="end_trigger" type="Node2D" unique_id=1149071925]
 
 [node name="end" type="Area2D" parent="." unique_id=2014418938]
@@ -24,6 +27,7 @@ shape = SubResource("RectangleShape2D_7hhj4")
 debug_color = Color(0, 0.6446726, 0.2824021, 0.41960785)
 
 [node name="solid" type="StaticBody2D" parent="." unique_id=2146905836]
+collision_layer = 2
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="solid" unique_id=1683872481]
 position = Vector2(-524, -22)
@@ -32,5 +36,9 @@ shape = SubResource("RectangleShape2D_veowf")
 [node name="CollisionShape2D2" type="CollisionShape2D" parent="solid" unique_id=436868707]
 position = Vector2(577, -22)
 shape = SubResource("RectangleShape2D_sle2r")
+
+[node name="CollisionShape2D3" type="CollisionShape2D" parent="solid" unique_id=477151438]
+position = Vector2(7, -101)
+shape = SubResource("RectangleShape2D_0dmti")
 
 [connection signal="body_entered" from="end" to="end" method="_on_body_entered"]

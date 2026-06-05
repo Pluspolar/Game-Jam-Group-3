@@ -3,12 +3,17 @@
 [ext_resource type="Script" uid="uid://c4ox0svdgy856" path="res://Scenes/main.gd" id="1_bo1nx"]
 [ext_resource type="PackedScene" uid="uid://cp63kc2ym1jcn" path="res://Scenes/player.tscn" id="1_jjgbg"]
 [ext_resource type="Shader" uid="uid://bojkb5ylllhp7" path="res://Scenes/main.gdshader" id="1_jjvhh"]
-[ext_resource type="PackedScene" uid="uid://dcj8qiqwygmrp" path="res://Levels/level_test.tscn" id="4_jjvhh"]
+[ext_resource type="Texture2D" uid="uid://qxy4rn2fm8bx" path="res://Sprites/target.png" id="4_jjvhh"]
+[ext_resource type="Script" uid="uid://dsgq1svepls0p" path="res://Scenes/lava.gd" id="5_21xkr"]
+[ext_resource type="Texture2D" uid="uid://db1erwblrn6fo" path="res://Sprites/lava.png" id="5_kry3j"]
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_jjvhh"]
 shader = ExtResource("1_jjvhh")
 shader_parameter/alpha = 0.0
 shader_parameter/red_multiplier = 0.0
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_21xkr"]
+size = Vector2(1306, 1446)
 
 [node name="main" type="Node2D" unique_id=1425132053 groups=["load_level"]]
 script = ExtResource("1_bo1nx")
@@ -17,10 +22,6 @@ string_power = 1.75
 player_range = 360.0
 
 [node name="level" type="Node2D" parent="." unique_id=741024077]
-
-[node name="level_test" parent="." unique_id=673225537 instance=ExtResource("4_jjvhh")]
-visible = false
-metadata/_edit_lock_ = true
 
 [node name="Cam" type="Camera2D" parent="." unique_id=1260990897]
 position = Vector2(640, 360)
@@ -40,3 +41,30 @@ size_flags_horizontal = 4
 
 [node name="Player" parent="." unique_id=38737271 instance=ExtResource("1_jjgbg")]
 position = Vector2(669, 580)
+
+[node name="target" type="Sprite2D" parent="." unique_id=784033697]
+texture_filter = 1
+rotation = 0.7853982
+scale = Vector2(2, 2)
+texture = ExtResource("4_jjvhh")
+
+[node name="lava" type="Area2D" parent="." unique_id=380609440]
+collision_layer = 32
+script = ExtResource("5_21xkr")
+
+[node name="Sprite2D2" type="Sprite2D" parent="lava" unique_id=1113092982]
+texture_filter = 1
+position = Vector2(692.99994, 4861)
+scale = Vector2(70.504, -91.657)
+texture = ExtResource("5_kry3j")
+
+[node name="Sprite2D" type="Sprite2D" parent="lava" unique_id=275640896]
+texture_filter = 1
+position = Vector2(640.00006, 1359.0001)
+scale = Vector2(20.515625, 20.515625)
+texture = ExtResource("5_kry3j")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="lava" unique_id=730358862]
+position = Vector2(640, 2374)
+shape = SubResource("RectangleShape2D_21xkr")
+debug_color = Color(0.99607843, 0, 0, 0.41960785)

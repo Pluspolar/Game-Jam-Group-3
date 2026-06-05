@@ -91,7 +91,8 @@ size = Vector2(24, 24)
 radius = 1.0
 
 [node name="Player" type="CharacterBody2D" unique_id=38737271]
-collision_mask = 19
+collision_layer = 17
+collision_mask = 3
 script = ExtResource("1_v0iea")
 speed = 500.0
 fall_multiplier = 0.005
@@ -180,11 +181,13 @@ visible = false
 shape = SubResource("RectangleShape2D_cvnsp")
 
 [node name="RayCast_wall" type="RayCast2D" parent="." unique_id=1728628983]
+visible = false
 target_position = Vector2(0, 0)
 collision_mask = 2
 hit_from_inside = true
 
 [node name="RayCast_silky" type="RayCast2D" parent="." unique_id=1102427421]
+visible = false
 target_position = Vector2(0, 0)
 collision_mask = 4
 hit_from_inside = true
@@ -192,6 +195,7 @@ collide_with_areas = true
 collide_with_bodies = false
 
 [node name="cast_point" type="Area2D" parent="." unique_id=361814074]
+visible = false
 z_index = 1
 collision_layer = 0
 collision_mask = 4

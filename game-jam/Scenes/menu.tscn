@@ -52,7 +52,7 @@ shadow_offset = Vector2(5, 5)
 
 [node name="CanvasLayer" type="CanvasLayer" parent="." unique_id=1829473894]
 
-[node name="Start_button" type="Button" parent="CanvasLayer" unique_id=240006197]
+[node name="Level_button" type="Button" parent="CanvasLayer" unique_id=240006197]
 anchors_preset = -1
 anchor_left = 0.3734375
 anchor_top = 0.43611112
@@ -122,6 +122,7 @@ vertical_alignment = 1
 script = ExtResource("4_158mb")
 
 [node name="Start_button2" type="Button" parent="CanvasLayer" unique_id=593371472]
+visible = false
 anchors_preset = -1
 anchor_left = 0.39140624
 anchor_top = 0.43611112
@@ -144,7 +145,6 @@ theme_override_styles/pressed = SubResource("StyleBoxFlat_cayip")
 theme_override_styles/hover = SubResource("StyleBoxFlat_xhh6f")
 text = "START"
 icon_alignment = 1
-script = ExtResource("2_158mb")
 metadata/_edit_use_anchors_ = true
 
 [node name="background" type="Parallax2D" parent="." unique_id=921263637]
@@ -159,9 +159,9 @@ position = Vector2(648.99994, 909.99994)
 scale = Vector2(4.379487, 3.4905214)
 texture = ExtResource("4_wwsa2")
 
-[connection signal="button_down" from="CanvasLayer/Start_button" to="CanvasLayer/Start_button" method="_on_button_down"]
-[connection signal="mouse_entered" from="CanvasLayer/Start_button" to="CanvasLayer/Start_button" method="_on_mouse_entered"]
-[connection signal="mouse_exited" from="CanvasLayer/Start_button" to="CanvasLayer/Start_button" method="_on_mouse_exited"]
+[connection signal="button_down" from="CanvasLayer/Level_button" to="CanvasLayer/Level_button" method="_on_button_down"]
+[connection signal="mouse_entered" from="CanvasLayer/Level_button" to="CanvasLayer/Level_button" method="_on_mouse_entered"]
+[connection signal="mouse_exited" from="CanvasLayer/Level_button" to="CanvasLayer/Level_button" method="_on_mouse_exited"]
 [connection signal="button_down" from="CanvasLayer/Quit_Button" to="CanvasLayer/Quit_Button" method="_on_button_down"]
 [connection signal="mouse_entered" from="CanvasLayer/Quit_Button" to="CanvasLayer/Quit_Button" method="_on_mouse_entered"]
 [connection signal="mouse_exited" from="CanvasLayer/Quit_Button" to="CanvasLayer/Quit_Button" method="_on_mouse_exited"]
